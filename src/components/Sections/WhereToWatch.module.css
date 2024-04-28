@@ -1,0 +1,44 @@
+.SectionWhereToWatch{
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  margin-block: 10px;
+}
+
+.SectionWhereToWatch h2{
+  font-size: 1.15em;
+  text-align: left;
+}
+
+.GridInfos{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.DivInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-top: 5px;
+  margin-right: 20px;
+}
+
+.DivInfo h3{
+  font-size: .95em;
+  opacity: .5;
+  font-weight: regular;
+}
+
+.DivProviders{
+  display: flex;
+  margin-top: 5px;
+}
+
+.DivProviders img{
+  height: 50px;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-right: 10px;
+}

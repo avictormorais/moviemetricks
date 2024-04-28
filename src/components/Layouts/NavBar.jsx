@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const NavBar = () => {
     const [isScrolled, setIsScrolled] = useState(false);
+    const [accessToken, setAccessToken] = useState(localStorage.getItem('accessToken'));
 
     useEffect(() => {
         function handleScroll() {
@@ -30,16 +31,16 @@ const NavBar = () => {
                 <img className={styles.navbarLogo} src={logo} alt="Logo" />
             </Link>
             <div className={styles.navbarIcons}>
-                <Link to={'/login'}>
+                <Link to={accessToken != 'undefined' && accessToken != null ? '/profile' : '/login'}>
                     <div className={styles.navbarIcon}>
                         <FaUser />
                     </div>
                 </Link>
-                <div className={styles.navbarSearch}>
-                    <Link to={'/search/'}>
+                <Link to={'/search/'}>
+                    <div className={styles.navbarSearch}>
                         <FaSearch />
-                    </Link>
-                </div>
+                    </div>
+                </Link>
             </div>
         </nav>
     );

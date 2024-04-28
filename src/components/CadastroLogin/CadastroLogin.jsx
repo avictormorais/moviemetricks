@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styles from './CadastroLogin.module.css';
 import Logo from '../../assets/icon.png';
 import api from '../../services/api';
-import Cookies from 'js-cookie';
 import { Link } from 'react-router-dom';
 
 function CadastroLogin() {
@@ -30,8 +29,20 @@ function CadastroLogin() {
             document.querySelector(`.${styles.LabelError}`).textContent = 'As senhas não coincidem.';
             return;
         }
+
+        if (senha.length < 6 && isCadastro) {
+            document.querySelector(`.${styles.LabelError}`).style.display = 'block';
+            document.querySelector(`.${styles.LabelError}`).textContent = 'A senha deve ter no mínimo 6 caracteres.';
+            return;
+        }
+
+        if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
+            document.querySelector(`.${styles.LabelError}`).style.display = 'block';
+            document.querySelector(`.${styles.LabelError}`).textContent = 'Por favor, insira um email válido.';
+            return;
+        }
+
         document.querySelector(`.${styles.LabelError}`).style.display = 'none';
-    
         if(isCadastro){
             api.post(`/api/cadastro`, {
                 email: email,
@@ -39,13 +50,17 @@ function CadastroLogin() {
                 password: senha
             })
             .then(response => {
-                Cookies.set('accessToken', response.data.access_token);
+                localStorage.setItem('accessToken', response.data.access_token)
                 window.location.href = '/';
             })
             .catch(error => {
-                if(error.request.status == 401){
+                if(error.request.status == 400){
                     document.querySelector(`.${styles.LabelError}`).style.display = 'block';
                     document.querySelector(`.${styles.LabelError}`).textContent = 'Email já cadastrado.';
+                    return;
+                }if(error.request.status == 401){
+                    document.querySelector(`.${styles.LabelError}`).style.display = 'block';
+                    document.querySelector(`.${styles.LabelError}`).textContent = 'Nome de usuário já em uso.';
                     return;
                 } else{
                     document.querySelector(`.${styles.LabelError}`).style.display = 'block';
@@ -60,7 +75,7 @@ function CadastroLogin() {
                 password: senha
             })
             .then(response => {
-                Cookies.set('accessToken', response.data.access_token);
+                localStorage.setItem('accessToken', response.data.access_token)
                 window.location.href = '/';
             })
             .catch(error => {

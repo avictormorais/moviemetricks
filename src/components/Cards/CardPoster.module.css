@@ -7,6 +7,7 @@
     border-radius: 10px;
     padding: 10px;
     transition: all .3s;
+    user-select: none;
 }
 
 .CardPoster:hover{
@@ -63,6 +64,29 @@
     fill: goldenrod;
     margin-right: 3px;
     opacity: 70%;
+}
+
+.CardPosterSeasonInfos{
+    display: flex;
+    justify-content: flex-start;
+    margin-inline: 5px;
+    margin-block: 5px;
+    align-items: center;
+}
+
+.CardPosterSeasonInfos svg{
+    font-size: 14px;
+    fill: var(--corTexto);
+    opacity: 0.5;
+    margin-right: 3px;
+    opacity: 70%;
+}
+
+.CardPosterSeasonInfos span{
+    font-weight: bold;
+    font-size: 0.8em;
+    opacity: 70%;
+    margin-left: 5px;
 }
 
 @media (max-width: 700px) {

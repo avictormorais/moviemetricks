@@ -1,5 +1,5 @@
 .Destaque{
-    height: 90vh;
+    height: 95vh;
     width: 100vw;
     overflow: hidden;
     background-size: cover;
@@ -11,6 +11,30 @@
     user-select: none;
     opacity: .9;
     transition: all .5s;
+    pointer-events: none;
+}
+
+.VideoContainer {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.VideoBackground,
+iframe.VideoBackground {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.35); /* alterar para media query, assim evita bordas do video no celular*/
+}
+
+
+.Fade {
+    position: relative;
+    z-index: 1;
 }
 
 .Destaque:hover {
@@ -36,6 +60,21 @@
     justify-content: bottom;
     align-items: bottom;
     padding-left: 40px;
+}
+
+@keyframes changeBackground {
+    0% {
+        background-image: linear-gradient(to top, var(--corFundo), transparent 50%),
+                          linear-gradient(to right, var(--corFundo), transparent 100%);
+    }
+    100% {
+        background-image: linear-gradient(to top, var(--corFundo), transparent 40%),
+                          linear-gradient(to right, var(--corFundo), transparent 70%);
+    }
+}
+
+.Fade, .MiddlePage {
+    animation: changeBackground 5s linear forwards;
 }
 
 .MiddlePage{

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 *{
   font-family: montserrat, sans-serif;
   margin: 0px;
@@ -10,7 +12,7 @@
   --corFundo: #1d2133;
   --corClaro: #25293d;
   --corCinza: #686e7a;
-  --corVerde: #00e486;
+  --corVerde: #0bd460;
   --corTexto: white;
 }
 

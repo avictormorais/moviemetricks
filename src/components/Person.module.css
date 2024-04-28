@@ -1,0 +1,29 @@
+.DivPessoa:hover{
+  cursor: pointer;
+}
+
+.DivPessoa{
+  align-items: top;
+  max-width: 70px;
+  margin-inline: 7px;
+}
+
+.DivPessoa img{
+  height: 65px;
+  border-radius: 50%;
+  border: 2px solid var(--corCinza);
+  transition: all 0.3s;
+  min-width: 65px;
+}
+
+.DivPessoa:hover img{
+  border: 2px solid var(--corVerde);
+}
+
+.DivPessoa h1{
+  width: auto;
+  font-size: 0.7em;
+  font-weight: lighter;
+  text-align: center;
+  overflow: hidden;
+}

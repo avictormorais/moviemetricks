@@ -85,7 +85,7 @@ input:focus{
     color: white;
 }
 
-button{
+.divLogin button{
     background-color: var(--corVerde);
     border-radius: 10px;
     width: 100%;
@@ -99,7 +99,7 @@ button{
     margin-block: 20px;
 }
 
-button:hover, button:focus{
+.divLogin button:hover, .divLogin button:focus{
     cursor: pointer;
     background-color: white;
     color: var(--corVerde);

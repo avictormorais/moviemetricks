@@ -1,0 +1,59 @@
+.SectionMoreInfo{
+  display: flex;
+  width: 90%;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+.SectionMoreInfo h2{
+  font-size: 1.15em;
+  text-align: left;
+}
+
+.GridInfos{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.DivInfo{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-top: 5px;
+  width: 145px;
+}
+
+.DivInfo h3{
+  font-size: .95em;
+  opacity: .5;
+  font-weight: regular;
+}
+
+.InfoContent{
+  margin-top: 5px;
+}
+
+.InfoContent svg{
+  margin-right: 10px;
+  font-size: 1.5em;
+}
+
+.InfoContent img{
+  max-height: 30px;
+  max-width: 130px;
+}
+
+.InfoContent h4{
+  font-size: .95em;
+  width: 145px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.Bandeira{
+  height: 20px;
+}

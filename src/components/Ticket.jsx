@@ -3,18 +3,16 @@ import QR from '../assets/qr-moviemetricks.svg'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa6";
+import api from '../services/api';
 
 function Ticket({title, rate, backDrop, poster, DiaMes, ano, id}){
     const [logo, setLogo] = useState(null);
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/movie/${id}/images?api_key=${import.meta.env.VITE_TMDB_API}`)
-            .then(response => response.json())
-            .then(data => {
-                const ptItem = data.logos.find(item => item.iso_639_1 === "pt");
-                const selectedItem = ptItem || data.logos.find(item => item.iso_639_1 === "en");
-                setLogo(selectedItem);
-            });
+        api.get(`/tmdb/logo?tipo=movie&id=${id}&height=w200`)
+        .then(response => {
+            setLogo(response.data.logo);
+        })
     }, [id]);
 
     return(
@@ -29,7 +27,7 @@ function Ticket({title, rate, backDrop, poster, DiaMes, ano, id}){
                         <div className={styles.D2}></div>
                         {logo ? (
                             <>
-                                <img className={styles.TicketLogo} src={`https://image.tmdb.org/t/p/w200${logo.file_path}`} alt="" />
+                                <img className={styles.TicketLogo} src={logo} alt="" />
                             </>
                         ) : (
                             <h1 className={styles.Title}>{title}</h1>

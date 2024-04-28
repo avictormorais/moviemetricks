@@ -1,0 +1,109 @@
+.ContainerCards{
+    background: linear-gradient(to bottom, var(--corClaro), transparent 80%);
+    border-radius: 10px;
+    width: 90vw;
+    min-height: 400px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.DivSeasons, .DivEpisodes{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.DivEpisodes{
+    display: flex;
+    flex-direction: column;
+}
+
+.DivSeasonTitle{
+    display: flex;
+    align-content: center;
+    flex-direction: row;
+    margin-block: 20px;
+    margin-left: 30px;
+}
+
+.DivSeasonTitle svg{
+    font-size: 1.4em;
+    margin-right: 10px;
+    margin-block: auto;
+}
+
+.DivSeasonTitle svg:hover{
+    cursor: pointer;
+}
+
+.TitleSeason, .SeasonsH2{
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: left;
+    text-align: left;
+    width: 95%;
+}
+
+.SeasonsH2{
+    margin-inline: 30px;
+}
+
+.SeasonsTitle{
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: left;
+    margin-inline: 30px;
+    margin-top: 20px;
+    text-align: left;
+    width: 95%;
+}
+
+.divCards {
+    width: 97%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(175px, 185px));
+    grid-gap: 0px;
+    margin-inline: 30px;
+    justify-content: start; 
+    align-items: center;
+}
+
+.gridEpisodes{
+    display: grid;
+    margin-inline: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(330px, 335px));
+    align-items: left;
+    justify-content: space-around;
+    grid-template-rows: 1fr auto;
+    grid-column-gap: 20px;
+    grid-row-gap: 30px;
+    grid-gap: 10px;
+    transition: opacity 1s;
+    border-radius: 10px;
+}
+
+@media (max-width: 700px) {
+    .SeasonsH2{
+        margin-top: 15px;
+        padding-left: 20px;
+    }
+    .divCards{
+        display: flex;
+        flex-direction: row;
+        overflow-x: scroll;
+        justify-content: start;
+    }
+    .SeasonsH2{
+        margin-left: 0;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .gridEpisodes{
+        grid-template-columns: repeat(auto-fit, minmax(110%, 100%));
+    }
+}

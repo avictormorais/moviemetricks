@@ -47,14 +47,14 @@ function Home() {
       )}
       <Separador nome="Séries populares hoje" />
       <DailyGrid tipo='tv'/>
-      <CardsByGenre title={"Séries da semana"} type={"tv"} />
+      <CardsByGenre title={"Séries da semana"} type={"tv"} showGenres={true} />
 
       {trendingMovie && (
         <CardTrend id={trendingMovie.id} tipo="movie" isMiddlePage={true}/>
       )}
       <Separador nome="Filmes populares hoje" />
       <DailyGrid tipo='movie'/>
-      <CardsByGenre title={"Filmes da semana"} type={"movie"} />
+      <CardsByGenre title={"Filmes da semana"} type={"movie"} showGenres={true} />
       <Separador nome="Filmes em cartaz" />
       <div
         style={{

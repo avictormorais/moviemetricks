@@ -1,0 +1,69 @@
+.DivContentActions{
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+  width: 90%;
+}
+
+.Eye, .Ellipsis{
+  font-size: 1.5em;
+  background-color: var(--corClaro);
+  padding: 7px;
+  border-radius: 100%;
+  margin-inline: 5px;
+  transition: all .3s;
+}
+
+.Ellipsis:hover, .Eye:hover{
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+.Eye:hover{
+  fill: var(--corVerde);
+}
+
+.Ellipsis:hover{
+  fill: var(--corVerde);
+}
+
+.MarkAsSeen{
+  font-size: .8em;
+  margin-right: 10px;
+  user-select: none;
+}
+
+.MarkAsSeen:hover{
+  cursor: pointer;
+}
+
+.DivTrailer{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+  margin-right: auto;
+  background-color: var(--corClaro);
+  border-radius: 10px;
+  padding: 5px;
+  padding-inline: 10px;
+  cursor: pointer;
+}
+
+.DivTrailer:hover .IconVideo{
+  transform: scale(1.1);
+  fill: red;
+  opacity: .75;
+  transition: all .3s;
+}
+
+.IconVideo{
+  font-size: 1.5em;
+}
+
+.DivTrailer h2{
+  font-size: .8em;
+  margin-left: 10px;
+  margin-block: auto;
+}

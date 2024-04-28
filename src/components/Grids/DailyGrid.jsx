@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
 import styles from './DailyGrid.module.css';
 import CardDaily from '../Cards/CardDaily';
+import api from '../../services/api';
 
 function DailyGrid({tipo}) {
     const [trends, setTrends] = useState([]);
 
     useEffect(() => {
-        fetch(`https://api.themoviedb.org/3/trending/${tipo}/day?api_key=${import.meta.env.VITE_TMDB_API}&language=pt-BR`)
-            .then(response => response.json())
-            .then(data => setTrends(data.results.slice(1, 4)));
+        api.get(`/tmdb/trending?tipo=${tipo}`)
+            .then(response => {
+                setTrends(response.data.trending.results.slice(1, 4));
+            })
+            .catch(error => {
+                console.log(error.request.responseText);
+            });
     }, []);
 
     return (
@@ -22,7 +27,7 @@ function DailyGrid({tipo}) {
                     vote_average={(trend.vote_average.toFixed(1)/2).toFixed(1)}
                     original_language={trend.original_language.toUpperCase()}
                     release_date={tipo === 'tv' ? trend.first_air_date.split('-')[0] : trend.release_date.split('-')[0]}
-                    backdrop_path={`https://image.tmdb.org/t/p/original/${trend.backdrop_path}`}
+                    backdrop_path={`https://image.tmdb.org/t/p/w500/${trend.backdrop_path}`}
                     title={trend.title || trend.name}
                 />
             ))}

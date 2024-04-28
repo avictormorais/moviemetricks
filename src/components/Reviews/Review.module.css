@@ -1,0 +1,77 @@
+.Review{
+  background-color: var(--corFundo);
+  border-radius: 10px;
+  width: calc(98% - 30px);
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-block: 15px;
+  padding-inline: 15px;
+  margin-bottom: 10px;
+}
+
+.DivInfosReview{
+  display: flex;
+  flex-wrap: row;
+  align-items: center;
+  justify-content: start;
+  width: 100%;
+}
+
+.DivInfosReview h1{
+  font-size: 1em;
+  font-weight: bolder;
+}
+
+.DivInfosReview span{
+  border-radius: 100%;
+  width: 5px;
+  height: 5px;
+  background-color: white;
+  margin-inline: 10px;
+}
+
+.DivInfosReview svg{
+  margin-right: 3px;
+  font-size: .75em;
+}
+
+.DivIcons{
+  margin-left: auto;
+}
+
+.Review p{
+  font-size: .9em;
+  margin-top: 10px;
+  text-align: justify;
+  width: 100%;
+}
+
+.FiledStar{
+  fill: goldenrod;
+}
+
+.EmptyStar{
+  opacity: 0.7;
+}
+
+.IconControls, .Flag{
+  fill: white;
+  transition: all .3s;
+  margin-inline: 5px;
+}
+
+.IconControls:hover, .Flag:hover{
+  cursor: pointer;
+}
+
+.Flag:hover{
+  fill: red;
+}
+
+.Spoiler{
+  filter: blur(5px);
+  cursor: pointer;
+}

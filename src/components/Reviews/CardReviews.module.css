@@ -1,0 +1,188 @@
+.CardReviews{
+  background-color: var(--corClaro);
+  border-radius: 10px;
+  margin-block: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: calc(90vw - 30px);
+  padding-block: 7px;
+  padding-inline: 15px;
+}
+
+.CardReviews h2{
+  font-size: 1.15em;
+  text-align: left;
+  margin-block: 7px;
+  margin-bottom: 15px;
+  width: 98%;
+}
+
+.DivReviews{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+}
+
+.CardReviews input{
+  width: 98%;
+  background-color: transparent;
+  border: none;
+  font-size: .85em;
+  margin-top: 15px;
+  outline: none;
+}
+
+.CardReviews hr{
+  width: 98%;
+  height: 3px;
+  background-color: var(--corFundo);
+  border: none;
+  margin-block: 5px;
+}
+
+.DivAddReview{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 98%;
+  margin-block: 5px;
+}
+
+.DivAddReview input{
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  border: none;
+  outline: none;
+  background-color: var(--corFundo);
+  cursor: pointer;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.DivAddReview input:checked::before {
+  content: '\2713';
+  display: block;
+  text-align: center;
+  line-height: 20px;
+  color: var(--corVerde);
+}
+
+.DivAddReview label{
+  font-size: .85em;
+  margin-left: 7px;
+  opacity: .7;
+  user-select: none;
+}
+
+.DivAddReview span{
+  width: 100%;
+}
+
+.DivAddReview button{
+  background-color: var(--corFundo);
+  border-radius: 50px;
+  font-size: .8em;
+  font-weight: bold;
+  padding-inline: 15px;
+  width: 120px;
+  margin: 0;
+  padding-block: 10px;
+  margin-left: 15px;
+  border: none;
+  transition: all .3s;
+}
+
+.DivAddReview button:hover{
+  cursor: pointer;
+}
+
+.BtnCancel:hover{
+  color: rgba(228, 32, 32, 0.808);
+}
+
+.BtnSend:hover{
+  color: rgba(32, 228, 91, 0.808);
+}
+
+.DivNoComments{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-block: 20px;
+  margin-block: 35px;
+}
+
+.DivNoComments svg{
+  opacity: .5;
+  height: 75px;
+  width: 75px;
+  animation: floating 3s ease-in-out infinite;
+}
+
+.DivStars{
+  display: flex;
+  width: 98%;
+  margin-top: 5px;
+  align-items: center;
+}
+
+.DivStars svg{
+  opacity: .7;
+  font-size: .9em;
+  margin-right: 2px;
+}
+
+.StarFilled svg{
+  fill: goldenrod;
+  opacity: 1;
+}
+
+.DivStars p{
+  color: rgb(240, 24, 24);
+  opacity: .8;
+  font-weight: bold;
+  font-size: .7em;
+  margin-left: 5px;
+  display: none;
+}
+
+.pError{
+  display: flex;
+  color: red;
+  opacity: .8;
+  font-weight: bold;
+  font-size: .65em;
+  text-wrap: nowrap;
+  text-align: right;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0);
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.DivNoComments h2{
+  font-size: .9em;
+  text-align: center;
+  margin-top: 10px;
+  opacity: .7;
+}

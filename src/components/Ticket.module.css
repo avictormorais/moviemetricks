@@ -47,7 +47,7 @@
     height: 100%;
     width: 0px;
     margin-left: 0px;
-    border-left: 4px dashed var(--corFundo);
+    border-left: 5px dashed var(--corFundo);
 }
 
 .TicketInfos{

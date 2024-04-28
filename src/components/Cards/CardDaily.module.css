@@ -65,7 +65,6 @@
     overflow: hidden;
     transition: height 0.5s ease;
     text-overflow: ellipsis;
-    max-height: auto;
 }
 
 .DailyDiv:hover .DailyOverview {

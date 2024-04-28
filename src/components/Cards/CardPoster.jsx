@@ -1,24 +1,36 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './CardPoster.module.css';
-import { FaStar, FaQuestion } from "react-icons/fa6";
-import { useState, useEffect } from "react";
+import { FaCalendarDay, FaList, FaQuestion, FaStar } from "react-icons/fa6";
 
-const CardPoster = ({img, title, estrelas, tipo, id}) => {
+const CardPoster = ({ img, title, estrelas, tipo, id, data, eps, onClick }) => {
     return (
-        <Link to={`/details/${tipo}/${id}`} className={styles.CardPoster}>
-            <img src={img} />
-            <h3 className={styles.CardPosterH3}>{title}</h3>
-            <div className={styles.CardPosterStars}>
-                {estrelas === 0 ? (
-                    <FaQuestion key={index} className={styles.starIcon} />
-                ) : (
-                    Array.from({ length: estrelas }, (_, index) => (
-                        <FaStar key={index} className={styles.starIcon} />
-                    ))
-                )}
+        tipo === "season" ? (
+            <div className={styles.CardPoster} onClick={onClick}>
+                <img src={img} alt={title} />
+                <h3 className={styles.CardPosterH3}>{title}</h3>
+                <div className={styles.CardPosterSeasonInfos}>
+                    <FaCalendarDay/>
+                    <span>{data}</span>
+                    <FaList style={{ marginLeft: 'auto' }} />
+                    <span>{eps} Eps</span>
+                </div>
             </div>
-        </Link>
+        ) : (
+            <Link to={`/details/${tipo}/${id}`} className={styles.CardPoster} onClick={onClick}>
+                <img src={img} alt={title} />
+                <h3 className={styles.CardPosterH3}>{title}</h3>
+                <div className={styles.CardPosterStars}>
+                    {estrelas === 0 ? (
+                        <FaQuestion className={styles.starIcon} />
+                    ) : (
+                        Array.from({ length: estrelas }, (_, index) => (
+                            <FaStar key={index} className={styles.starIcon} />
+                        ))
+                    )}
+                </div>
+            </Link>
+        )
     );
 }
 
