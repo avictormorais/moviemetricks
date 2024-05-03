@@ -16,6 +16,33 @@
   --corTexto: white;
 }
 
+[data-theme="default"]{
+  --corFundo: #111629;
+  --corClaro: #1e243a;
+}
+
+[data-theme="soft"]{
+  --corFundo: #1d2133;
+  --corClaro: #25293d;
+}
+
+[data-theme="carmesin"]{
+  --corFundo: #1f0c19;
+  --corClaro: #2a1825;
+}
+
+[data-theme="blue"]{
+  --corFundo: #1e2529;
+  --corClaro: #171d20;
+  --corTexto: #bde6fb;
+}
+
+[data-theme="rose"]{
+  --corFundo: #232136;
+  --corClaro: #393552;
+  --corTexto: #e0def4;
+}
+
 Link{
   text-decoration: none;
   border: none;
