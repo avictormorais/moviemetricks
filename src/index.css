@@ -6,11 +6,12 @@
   padding: 0px;
   text-decoration: none;
   color: var(--corTexto);
+  transition: all .5s;
 }
 
 :root{
-  --corFundo: #1d2133;
-  --corClaro: #25293d;
+  --corFundo: #111629;
+  --corClaro: #1e243a;
   --corCinza: #686e7a;
   --corVerde: #0bd460;
   --corTexto: white;
