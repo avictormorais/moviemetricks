@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import logo from '../../assets/icon.png';
 import styles from './Footer.module.css';
 import { FaT } from 'react-icons/fa6';
@@ -13,7 +13,15 @@ function Footer() {
     const handleThemeChange = (themeName) => {
         toggleThemeList();
         document.body.setAttribute('data-theme', themeName);
+        localStorage.setItem('theme', themeName);
     };
+
+    useEffect(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            document.body.setAttribute('data-theme', savedTheme);
+        }
+    }, []);
 
     return (
         <footer>
