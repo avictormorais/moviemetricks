@@ -65,6 +65,7 @@ footer h3:hover{
 .TitleTemas{
     margin-block: auto;
     margin-left: 10px;
+    cursor: pointer;
 }
 
 .DivIconTema{
@@ -154,5 +155,25 @@ footer h3:hover{
     footer h3 {
         text-align: center;
         margin-block: 10px;
+    }
+
+    .DivTemas{
+        margin: 0;
+        justify-content: center;
+        align-content: center;
+        margin-top: 15px;
+    }
+
+    .DivIconTema{
+        margin: 0;
+    }
+
+    .TitleTemas{
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    .Theme{
+        width: 90%;
     }
 }
