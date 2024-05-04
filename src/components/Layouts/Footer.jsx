@@ -33,7 +33,7 @@ function Footer() {
             <span></span>
             <div>
                 <h3>Sobre</h3>
-                <h3>Github</h3>
+                <h3><a target='_blank' href="https://github.com/avictormorais/moviemetricks">Github</a></h3>
             </div>
             <div className={styles.DivTemas}>
                 <div className={styles.ThemeList} style={{ display: isThemeListVisible ? 'flex' : 'none' }}>
