@@ -106,7 +106,7 @@ function CardReviews({ id, type }){
     <div className={styles.CardReviews}>
     <h2>Avaliações</h2>
     <div className={styles.DivReviews}>
-      {reviews.length > 0 || userId ? (
+      {reviews.length > 0 && userId ? (
         reviews.map((review) => (
           <Review key={`${review.username}_${review.review}`} id={review._id} handleGetReviews={handleGetReviews} isOwner={userId === review.user_id} userName={review.username} review={review.review} isSpoiler={review.is_spoiler} stars={review.stars} />
         ))
