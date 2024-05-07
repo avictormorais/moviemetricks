@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 function CardReviews({ id, type }){
   const [review, setReview] = useState("");
   const [userId, setUserId] = useState(null);
+  const [IsAdm, setIsAdm] = useState(false);
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [isSpoiler, setIsSpoiler] = useState(false);
@@ -22,6 +23,7 @@ function CardReviews({ id, type }){
 
     api.get(`/api/user_id`, config)
       .then(response => {
+        setIsAdm(response.data.isAdmin)
         setUserId(response.data.userId);
       })
       .catch(error => {
@@ -108,7 +110,7 @@ function CardReviews({ id, type }){
     <div className={styles.DivReviews}>
       {reviews.length > 0 && userId ? (
         reviews.map((review) => (
-          <Review key={`${review.username}_${review.review}`} id={review._id} handleGetReviews={handleGetReviews} isOwner={userId === review.user_id} userName={review.username} review={review.review} isSpoiler={review.is_spoiler} stars={review.stars} />
+          <Review key={`${review.username}_${review.review}`} id={review._id} handleGetReviews={handleGetReviews} isAdmin={IsAdm} isOwner={userId === review.user_id} userName={review.username} review={review.review} isSpoiler={review.is_spoiler} stars={review.stars} />
         ))
       ) : (
         <div className={styles.DivNoComments}>

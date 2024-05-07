@@ -7,7 +7,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-block: 15px;
+  padding-bottom: 15px;
+  padding-top: 10px;
   padding-inline: 15px;
   margin-bottom: 10px;
 }
@@ -33,7 +34,7 @@
   margin-inline: 10px;
 }
 
-.DivInfosReview svg{
+.FiledStar, .EmptyStar{
   margin-right: 3px;
   font-size: .75em;
 }
@@ -74,4 +75,22 @@
 .Spoiler{
   filter: blur(5px);
   cursor: pointer;
+}
+
+.divProfilePic{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  height: 40px;
+  width: 40px;
+  border-radius: 100%;
+  background-color: var(--corClaro);
+}
+
+.IconProfilePic{
+  height: 30px;
+  width: 30px;
+  fill: white;
 }
