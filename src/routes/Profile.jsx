@@ -121,13 +121,9 @@ function Profile() {
       {movies && tvShows && username ? (
         <>
           <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} handleEdit={handleEdit} />
-          {!showEdit ? (
+          {showEdit && (
             <>
-              <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows}/>
-              <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies}/>
-            </>
-          ) : (
-            <>
+              <h1 className={styles.EditTitle}>Editar perfil</h1>
               <div className={styles.DivEdit}>
                 <div className={styles.divInput}>
                   <p>Nova senha</p>
@@ -163,6 +159,8 @@ function Profile() {
               </div>
             </>
           )}
+          <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows}/>
+          <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies}/>
         </>
       ) : (
         <Loading/>

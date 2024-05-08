@@ -3,9 +3,15 @@
   flex-direction: row;
   align-items: start;
   justify-content: start;
-  margin-top: 20px;
   flex-wrap: wrap;
 
+}
+
+.EditTitle{
+  font-size: 1.2em;
+  text-align: left;
+  margin-block: 10px;
+  margin-top: 25px;
 }
 
 .divInput{
@@ -13,12 +19,10 @@
   flex-direction: column;
   align-items: start;
   justify-content: center;
-  margin-top: 20px;
   margin-right: 20px;
 }
 
 .divInput p{
-  margin-left: 25px;
   font-size: 1em;
   font-weight: bold;
   margin-bottom: 5px;
@@ -29,14 +33,14 @@
   font-size: .9em;
   font-weight: bold;
   color: white;
-  background-color: transparent;
+  background-color: var(--corClaro);
   border-radius: 10px;
   border: #565c66 2px solid;
   padding-block: 15px;
   outline: none;
   margin-bottom: 15px;
   padding-inline: 20px;
-  margin-inline: 20px;
+  margin-right: 20px;
   transition: all .3s;
 }
 
@@ -55,7 +59,6 @@ input:focus{
 }
 
 .ActionsEdit{
-  margin-left: 25px;
   display: flex;
   flex-direction: row;
   justify-content: start;
