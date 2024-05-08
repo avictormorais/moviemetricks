@@ -21,8 +21,12 @@ function Review({stars, review, userName, isSpoiler}){
           <FaRegStar key={index} className={styles.EmptyStar} />
         ))}
         <div className={styles.DivIcons}>
-          <FaTrash className={styles.IconControls}/>
-          {/*<FaPen className={styles.IconControls}/>*/}
+          {(isOwner || isAdmin) && (
+            <>
+              {/*<FaPen className={styles.IconControls} onClick={handleEditComment}/>*/}
+              <FaTrash className={styles.IconControls} onClick={handleDeletePost}/>
+            </>
+          )}
           <FaFlag className={styles.Flag}/>
         </div>
       </div>

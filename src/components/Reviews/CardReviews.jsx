@@ -11,6 +11,30 @@ function CardReviews({ id, type }){
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [isSpoiler, setIsSpoiler] = useState(false);
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    };
+
+    if(localStorage.getItem('accessToken')){
+      api.get(`/api/user_id`, config)
+        .then(response => {
+          setIsAdm(response.data.isAdmin)
+          setUserId(response.data.userId);
+        })
+        .catch(error => {
+          setIsAdm(false);
+          setUserId('null');
+          console.log(error);
+        });
+    } else{
+      setIsAdm(false);
+      setUserId('null');
+    }
+  }, []);
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -54,7 +78,8 @@ function CardReviews({ id, type }){
       }
     };
   
-    api.get(`/api/user_name`, config)
+    if(localStorage.getItem('accessToken')){
+      api.get(`/api/user_name`, config)
       .then(response => {
       let username = response.data.user;
       const newReview = {
@@ -79,6 +104,7 @@ function CardReviews({ id, type }){
       .catch(error => {
       console.log(error);
       });
+    }
   };  
 
   const handleSpoilerChange = (e) => {
