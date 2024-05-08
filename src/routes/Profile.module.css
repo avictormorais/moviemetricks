@@ -35,21 +35,13 @@
   color: white;
   background-color: var(--corClaro);
   border-radius: 10px;
-  border: #565c66 2px solid;
+  border: none;
   padding-block: 15px;
   outline: none;
   margin-bottom: 15px;
   padding-inline: 20px;
   margin-right: 20px;
   transition: all .3s;
-}
-
-.DivEdit input:hover{
-  border: white 2px solid;
-}
-
-input:focus{
-  border: white 2px solid;
 }
 
 .DivEdit input::text{
