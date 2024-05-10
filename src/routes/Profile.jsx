@@ -100,7 +100,7 @@ function Profile() {
     api.put(`/api/user/profile`, data, config)
     .then(response => {
       console.log(response.data)
-      navigate('/profile')
+      navigate('/', { replace: true });
     })
     .catch(error => {
       if(error.response.status === 401){
