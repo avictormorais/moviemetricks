@@ -100,7 +100,7 @@ function Profile() {
     api.put(`/api/user/profile`, data, config)
     .then(response => {
       console.log(response.data)
-      window.location.reload();
+      navigate('/profile')
     })
     .catch(error => {
       if(error.response.status === 401){
