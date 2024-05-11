@@ -92,11 +92,11 @@ function CardReviews({ id, type }){
         media_type: type,
         media_id: id,
       };
+      setReview("");
+      setRating(0);
+      setIsSpoiler(false);
       api.post('/api/comment', newReview, config)
         .then(response => {
-          setReview("");
-          setRating(0);
-          setIsSpoiler(false);
           handleGetReviews();
         })
         .catch(error => {
