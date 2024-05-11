@@ -105,11 +105,11 @@ function Profile() {
     .catch(error => {
       if(error.response.status === 401){
         document.querySelector(`.${styles.pError}`).style.display = 'block';
-        document.querySelector(`.${styles.pError}`).innerHTML = 'Email já em uso.';
+        document.querySelector(`.${styles.pError}`).innerHTML = 'Email já cadastrado.';
         return;
       } if(error.response.status === 400){
         document.querySelector(`.${styles.pError}`).style.display = 'block';
-        document.querySelector(`.${styles.pError}`).innerHTML = 'User já em uso.';
+        document.querySelector(`.${styles.pError}`).innerHTML = 'Username já em uso.';
         return;
       }
     });
@@ -117,7 +117,7 @@ function Profile() {
   }
 
   return (
-    <div>
+    <div className={styles.divProfile}>
       {movies && tvShows && username ? (
         <>
           <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} handleEdit={handleEdit} />
