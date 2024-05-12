@@ -8,9 +8,35 @@ import { useEffect, useState } from 'react';
 
 function CardReviews({ id, type }){
   const [review, setReview] = useState("");
+  const [userId, setUserId] = useState(null);
+  const [IsAdm, setIsAdm] = useState(false);
   const [rating, setRating] = useState(0);
   const [reviews, setReviews] = useState([]);
   const [isSpoiler, setIsSpoiler] = useState(false);
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+      }
+    };
+
+    if(localStorage.getItem('accessToken')){
+      api.get(`/api/user_id`, config)
+        .then(response => {
+          setIsAdm(response.data.isAdmin)
+          setUserId(response.data.userId);
+        })
+        .catch(error => {
+          setIsAdm(false);
+          setUserId('null');
+          console.log(error);
+        });
+    } else{
+      setIsAdm(false);
+      setUserId('null');
+    }
+  }, []);
   const navigate = useNavigate();
 
   const handleCancel = () => {
@@ -22,17 +48,17 @@ function CardReviews({ id, type }){
     setRating(star);
   };
 
-  useEffect(() => {
-    const handleGetReviews = () => {
-      api.get(`/api/comment/${type}/${id}`)
-        .then(response => {
-          setReviews(response.data.comments);
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    }
+  const handleGetReviews = () => {
+    api.get(`/api/comment/${type}/${id}`)
+      .then(response => {
+        setReviews(response.data.comments);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
 
+  useEffect(() => {
     handleGetReviews();
   }, [type, id]);
   
@@ -54,7 +80,8 @@ function CardReviews({ id, type }){
       }
     };
   
-    api.get(`/api/user_name`, config)
+    if(localStorage.getItem('accessToken')){
+      api.get(`/api/user_name`, config)
       .then(response => {
       let username = response.data.user;
       const newReview = {
@@ -70,7 +97,7 @@ function CardReviews({ id, type }){
           setReview("");
           setRating(0);
           setIsSpoiler(false);
-          setReviews([...reviews, newReview]);
+          handleGetReviews();
         })
         .catch(error => {
           console.log(error);
@@ -79,6 +106,7 @@ function CardReviews({ id, type }){
       .catch(error => {
       console.log(error);
       });
+    }
   };  
 
   const handleSpoilerChange = (e) => {
@@ -89,9 +117,9 @@ function CardReviews({ id, type }){
     <div className={styles.CardReviews}>
     <h2>Avaliações</h2>
     <div className={styles.DivReviews}>
-      {reviews.length > 0 ? (
+      {reviews.length > 0 && userId ? (
         reviews.map((review) => (
-          <Review key={`${review.username}_${review.review}`} userName={review.username} review={review.review} isSpoiler={review.is_spoiler} stars={review.stars} />
+          <Review key={`${review.username}_${review.review}`} id={review._id} handleGetReviews={handleGetReviews} isAdmin={IsAdm} isOwner={userId === review.user_id} userName={review.username} review={review.review} isSpoiler={review.is_spoiler} stars={review.stars} />
         ))
       ) : (
         <div className={styles.DivNoComments}>

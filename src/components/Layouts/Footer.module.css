@@ -53,6 +53,73 @@ footer h3:hover{
     opacity: 100%;
 }
 
+.DivTemas{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    margin-left: auto;
+    margin-right: 80px;
+}
+
+.TitleTemas{
+    margin-block: auto;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.DivIconTema{
+    border-radius: 10px;
+    background-color: var(--corFundo);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.ThemeList{
+    position: fixed;
+    width: 150px;
+    background-color: var(--corClaro);
+    border: 2px solid var(--corFundo);
+    bottom: 12%;
+    display: none;
+}
+
+.Theme{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    background-color: var(--corFundo);
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.Theme p{
+    font-weight: bold;
+    color: white;
+    opacity: 1;
+    width: 65%;
+    margin-left: 10px;
+}
+
+.ThemePreview{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: var(--corClaro);
+}
+
+.Theme svg{
+    margin-inline: auto;
+}
+
 @media (max-width: 700px) {
     footer {
         flex-direction: column;
@@ -88,5 +155,25 @@ footer h3:hover{
     footer h3 {
         text-align: center;
         margin-block: 10px;
+    }
+
+    .DivTemas{
+        margin: 0;
+        justify-content: center;
+        align-content: center;
+        margin-top: 15px;
+    }
+
+    .DivIconTema{
+        margin: 0;
+    }
+
+    .TitleTemas{
+        margin: 0;
+        margin-left: 10px;
+    }
+
+    .Theme{
+        width: 90%;
     }
 }

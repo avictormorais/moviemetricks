@@ -13,7 +13,10 @@ function CadastroLogin() {
 
     const handleEmailChange = (event) => setEmail(event.target.value);
     const handleSenhaChange = (event) => setSenha(event.target.value);
-    const handleUsernameChange = (event) => setUsername(event.target.value);
+    const handleUsernameChange = (event) => {
+        const lowercaseUsername = event.target.value.toLowerCase();
+        setUsername(lowercaseUsername.replace(/\s/g, ''));
+    };
     const handleRepetirSenhaChange = (event) => setRepetirSenha(event.target.value);
 
     const handleSubmit = (event) => {
@@ -39,6 +42,12 @@ function CadastroLogin() {
         if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
             document.querySelector(`.${styles.LabelError}`).style.display = 'block';
             document.querySelector(`.${styles.LabelError}`).textContent = 'Por favor, insira um email válido.';
+            return;
+        }
+
+        if (username.includes(' ')){
+            document.querySelector(`.${styles.LabelError}`).style.display = 'block';
+            document.querySelector(`.${styles.LabelError}`).textContent = 'O nome de usuário não pode conter espaços.';
             return;
         }
 

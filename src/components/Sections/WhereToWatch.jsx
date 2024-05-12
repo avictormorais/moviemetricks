@@ -21,8 +21,8 @@ function WhereToWatch({ id, tipo, region }){
             <div className={styles.DivInfo}>
               <h3>Streaming</h3>
               <div className={styles.DivProviders}>
-                {providers.flatrate.map(provider => (
-                  <img key={provider.id} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                {providers.flatrate.map((provider, index) => (
+                  <img key={index} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
                 ))}
               </div>
             </div>
@@ -31,8 +31,8 @@ function WhereToWatch({ id, tipo, region }){
             <div className={styles.DivInfo}>
               <h3>Grátis</h3>
               <div className={styles.DivProviders}>
-                {providers.free.map(provider => (
-                  <img key={provider.id} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                {providers.free.map((provider, index) => (
+                  <img key={index} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
                 ))}
               </div>
             </div>
@@ -41,8 +41,8 @@ function WhereToWatch({ id, tipo, region }){
             <div className={styles.DivInfo}>
               <h3>Propaganda</h3>
               <div className={styles.DivProviders}>
-                {providers.ads.map(provider => (
-                  <img key={provider.id} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                {providers.ads.map((provider, index) => (
+                  <img key={index} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
                 ))}
               </div>
             </div>
@@ -51,8 +51,8 @@ function WhereToWatch({ id, tipo, region }){
             <div className={styles.DivInfo}>
               <h3>Comprar</h3>
               <div className={styles.DivProviders}>
-                {providers.buy.map(provider => (
-                  <img key={provider.id} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                {providers.buy.map((provider, index) => (
+                  <img key={index} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
                 ))}
               </div>
             </div>
@@ -61,8 +61,8 @@ function WhereToWatch({ id, tipo, region }){
             <div className={styles.DivInfo}>
               <h3>Alugar</h3>
               <div className={styles.DivProviders}>
-                {providers.rent.map(provider => (
-                  <img key={provider.id} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
+                {providers.rent.map((provider, index) => (
+                  <img key={index} src={`https://image.tmdb.org/t/p/original${provider.logo_path}`} alt={provider.provider_name} />
                 ))}
               </div>
             </div>

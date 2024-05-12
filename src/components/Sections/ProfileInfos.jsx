@@ -1,8 +1,8 @@
-import { FaCircleUser, FaDoorOpen } from "react-icons/fa6";
+import { FaCircleUser, FaDoorOpen, FaPencil } from "react-icons/fa6";
 import styles from "./ProfileInfos.module.css";
 import { useNavigate } from 'react-router-dom';
 
-function ProfileInfos({username, tvShows, movies}){
+function ProfileInfos({username, tvShows, movies, handleEdit}){
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -19,6 +19,12 @@ function ProfileInfos({username, tvShows, movies}){
           <p><span>{tvShows}</span> Séries vistas</p>
           <p><span>{movies}</span> Filmes vistos</p>
         </div>
+      </div>
+      <div className={styles.DivEdit} onClick={handleEdit}>
+        <span>
+          <FaPencil className={styles.IconEdit}/>
+          <p>Editar</p>
+        </span>
       </div>
       <div className={styles.DivLogout} onClick={handleLogout}>
         <span>

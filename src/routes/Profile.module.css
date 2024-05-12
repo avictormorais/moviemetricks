@@ -1,0 +1,98 @@
+.divProfile{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 90%;
+  height: 100%;
+
+}
+
+.DivEdit{
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+  flex-wrap: wrap;
+
+  @media screen and (max-width: 800px){
+    flex-direction: column;
+    
+  }
+}
+
+.EditTitle{
+  font-size: 1.2em;
+  text-align: left;
+  margin-block: 10px;
+  margin-top: 25px;
+}
+
+.divInput{
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  margin-right: 20px;
+}
+
+.divInput p{
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.DivEdit input{
+  width: calc(100% - 40px);
+  font-size: .9em;
+  font-weight: bold;
+  color: white;
+  background-color: var(--corClaro);
+  border-radius: 10px;
+  border: none;
+  padding-block: 15px;
+  outline: none;
+  margin-bottom: 15px;
+  padding-inline: 20px;
+  margin-right: 20px;
+  transition: all .3s;
+}
+
+.DivEdit input::text{
+  color: white;
+  font-weight: bold;
+  margin-inline: 20px;
+}
+
+.ActionsEdit{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-content: center;
+}
+
+.pError{
+  color: red;
+  margin-block: auto;
+  margin-left: 15px;
+  display: none;
+}
+
+.ActionsEdit button{
+  background-color: var(--corVerde);
+  border-radius: 10px;
+  width: 70px;
+  padding-block: 10px;
+  font-size: .85em;
+  color: white;
+  font-weight: bolder;
+  outline: none;
+  border: none;
+  transition: all .3s;
+  margin-block: 20px;
+}
+
+.ActionsEdit button:hover, .ActionsEdit button:focus{
+  cursor: pointer;
+  background-color: white;
+  color: var(--corVerde);
+}
