@@ -32,9 +32,9 @@
 .divCards {
     width: 97%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 185px)); /* ajuste do tamanho mínimo e máximo */
+    grid-template-columns: repeat(auto-fill, minmax(175px, 185px));
     grid-gap: 0px;
-    justify-content: center; /* centraliza as colunas horizontalmente */
+    justify-content: left;
     align-items: center;
 }
 

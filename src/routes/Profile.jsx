@@ -120,7 +120,7 @@ function Profile() {
     <div className={styles.divProfile}>
       {movies && tvShows && username ? (
         <>
-          <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} handleEdit={handleEdit} />
+          <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} handleEdit={handleEdit} showEdit={true} showLogout={true}/>
           {showEdit && (
             <>
               <h1 className={styles.EditTitle}>Editar perfil</h1>

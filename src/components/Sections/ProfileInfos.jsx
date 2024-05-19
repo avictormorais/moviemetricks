@@ -2,7 +2,7 @@ import { FaCircleUser, FaDoorOpen, FaPencil } from "react-icons/fa6";
 import styles from "./ProfileInfos.module.css";
 import { useNavigate } from 'react-router-dom';
 
-function ProfileInfos({username, tvShows, movies, handleEdit}){
+function ProfileInfos({ username, tvShows, movies, handleEdit, showEdit, showLogout }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -10,9 +10,9 @@ function ProfileInfos({username, tvShows, movies, handleEdit}){
     navigate('/');
   };
 
-  return(
+  return (
     <div className={styles.DivProfileInfos}>
-      <FaCircleUser className={styles.IconProfile}/>
+      <FaCircleUser className={styles.IconProfile} />
       <div className={styles.MainDivProfile}>
         <h1>{username}</h1>
         <div className={styles.InfosDiv}>
@@ -20,18 +20,24 @@ function ProfileInfos({username, tvShows, movies, handleEdit}){
           <p><span>{movies}</span> Filmes vistos</p>
         </div>
       </div>
-      <div className={styles.DivEdit} onClick={handleEdit}>
-        <span>
-          <FaPencil className={styles.IconEdit}/>
-          <p>Editar</p>
-        </span>
-      </div>
-      <div className={styles.DivLogout} onClick={handleLogout}>
-        <span>
-          <FaDoorOpen className={styles.IconLogout}/>
-          <p>Sair</p>
-        </span>
-      </div>
+      {showEdit && (
+        <>
+          <div className={styles.DivEdit} onClick={handleEdit}>
+            <span>
+              <FaPencil className={styles.IconEdit} />
+              <p>Editar</p>
+            </span>
+          </div>
+        </>
+      )}
+      {showLogout && (
+        <div className={styles.DivLogout} onClick={handleLogout}>
+          <span>
+            <FaDoorOpen className={styles.IconLogout} />
+            <p>Sair</p>
+          </span>
+        </div>
+      )}
     </div>
   )
 

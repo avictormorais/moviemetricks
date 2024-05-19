@@ -1,6 +1,7 @@
 import { FaStar, FaRegStar, FaFlag, FaPen, FaTrash, FaRegFaceAngry, FaRegFaceMeh, FaRegFaceSmile, FaRegFaceSmileBeam, FaRegFaceGrinHearts } from "react-icons/fa6";
 import styles from "./Review.module.css";
 import api from "../../services/api";
+import { Link } from "react-router-dom";
 
 function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handleGetReviews}){
 
@@ -58,7 +59,7 @@ function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handl
           {stars === 4 && <FaRegFaceSmileBeam className={styles.IconProfilePic}/>}
           {stars === 5 && <FaRegFaceGrinHearts className={styles.IconProfilePic}/>}
         </div>
-        <h1>{userName}</h1>
+        <Link to={`/u/${userName}`} className={styles.LinkProfile}>{userName}</Link>
         <span />
         {Array.from({ length: stars }, (_, index) => (
           <FaStar key={index} className={styles.FiledStar} />

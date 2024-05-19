@@ -1,0 +1,30 @@
+.notFound, .notLogged{
+  width: 100%;
+  height: calc(100vh - 175px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFound svg, .notLogged svg{
+  font-size: 80px;
+  margin-bottom: 15px;
+}
+
+.notFound h1, .notLogged h1{
+  font-size: 1em;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.notLogged a{
+  font-size: .85em;
+  font-weight: bolder;
+  margin-top: 20px;
+  background-color: var(--corClaro);
+  color: var(--corVerde);
+  padding: 10px;
+  padding-inline: 15px;
+  border-radius: 5px;
+}
