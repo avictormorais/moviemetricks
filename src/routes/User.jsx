@@ -7,6 +7,8 @@ import CardsByGenre from '../components/Grids/CardsByGenre';
 import styles from './User.module.css';
 import { FaUserSlash, FaKey } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import Loading from '../components/Layouts/Loading';
+import Review from '../components/Reviews/Review';
 
 function User() {
   const [tvShows, setTvShows] = useState(null);
@@ -41,7 +43,7 @@ function User() {
           setTvShows(tvShowsList);
           api.get(`/api/comment/user/${username}`, config)
             .then(response => {
-              setComments(response.data)
+              setComments(response.data.comments.reverse())
               console.log(response.data)
             })
         })
@@ -54,34 +56,55 @@ function User() {
   }, [username]);
 
   return (
-    <>
-      {notLogged && (
-        <div className={styles.notLogged}>
-          <FaKey />
-          <h1>Você precisa estar logado para acessar essa página.</h1>
-          <Link to="/login">Fazer login.</Link>
-        </div>
-      )}
-      {notFound && (
-        <div className={styles.notFound}>
-          <FaUserSlash />
-          <h1>Usuário não encontrado.</h1>
-        </div>
-      )}
-      {movies && tvShows && comments && (
-        <>
-          <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} showEdit={false} showLogout={isOwner} />
-          {tvShows.length > 0 && (
-            <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows} />
-          )}
-          {movies.length > 0 && (
-            <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies} />)
-          }
-        </>
-      )}
-    </>
+    tvShows ? (
+      <>
+        {notLogged && (
+          <div className={styles.notLogged}>
+            <FaKey />
+            <h1>Você precisa estar logado para acessar essa página.</h1>
+            <Link to="/login">Fazer login.</Link>
+          </div>
+        )}
+        {notFound && (
+          <div className={styles.notFound}>
+            <FaUserSlash />
+            <h1>Usuário não encontrado.</h1>
+          </div>
+        )}
+        {movies && tvShows && comments && (
+          <>
+            <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} showEdit={false} showLogout={isOwner} />
+            {tvShows.length > 0 && (
+              <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows} />
+            )}
+            {movies.length > 0 && (
+              <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies} />)
+            }
+            <div className={styles.divReviews}>
+              <h1>Avaliações</h1>
+              <div>
+                {comments.map((comment) => (
+                  <Review
+                    key={`${comment.username}_${comment.review}`}
+                    id={comment._id}
+                    userName={comment.title ? (comment.media_type === 'tv' ? `${comment.title} (Série)` : `${comment.title} (Filme)`) : comment.username}
+                    review={comment.review}
+                    isSpoiler={comment.is_spoiler}
+                    stars={comment.stars}
+                    redirectToContent={true}
+                    mediaId={comment.media_id}
+                    mediaType={comment.media_type}
+                  />
+                ))}
+              </div>
+            </div>
+          </>
+        )}
+      </>
+    ) : (
+      <Loading />
+    )
   )
-
 }
 
 export default User;

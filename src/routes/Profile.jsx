@@ -6,6 +6,7 @@ import ProfileInfos from '../components/Sections/ProfileInfos';
 import CardsByGenre from '../components/Grids/CardsByGenre';
 import { useState } from 'react';
 import Loading from '../components/Layouts/Loading';
+import Review from '../components/Reviews/Review';
 
 function Profile() {
   const navigate = useNavigate();
@@ -13,7 +14,7 @@ function Profile() {
   const [username, setUsername] = useState(null);
   const [tvShows, setTvShows] = useState(null);
   const [showEdit, setShowEdit] = useState(false);
-
+  const [comments, setComments] = useState([]);
   
   const [novaSenha, setNovaSenha] = useState('');
   const [usernameEdit, setUsernameEdit] = useState('');
@@ -42,7 +43,7 @@ function Profile() {
         setEmail(response.data.email)
         api.get(`/api/comment/user/${response.data.username}`, config)
         .then(response => {
-          console.log(response.data)
+          setComments(response.data.comments.reverse())
         })
       })
 
@@ -161,6 +162,24 @@ function Profile() {
           )}
           <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows}/>
           <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies}/>
+          <div className={styles.divReviews}>
+              <h1>Avaliações</h1>
+              <div>
+                {comments.map((comment) => (
+                  <Review
+                    key={`${comment.username}_${comment.review}`}
+                    id={comment._id}
+                    userName={comment.title ? (comment.media_type === 'tv' ? `${comment.title} (Série)` : `${comment.title} (Filme)`) : comment.username}
+                    review={comment.review}
+                    isSpoiler={comment.is_spoiler}
+                    stars={comment.stars}
+                    redirectToContent={true}
+                    mediaId={comment.media_id}
+                    mediaType={comment.media_type}
+                  />
+                ))}
+              </div>
+            </div>
         </>
       ) : (
         <Loading/>

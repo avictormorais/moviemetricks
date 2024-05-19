@@ -6,7 +6,7 @@ import api from "../../services/api";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-function CardReviews({ id, type }){
+function CardReviews({ id, type, title }){
   const [review, setReview] = useState("");
   const [userId, setUserId] = useState(null);
   const [IsAdm, setIsAdm] = useState(false);
@@ -91,6 +91,7 @@ function CardReviews({ id, type }){
         is_spoiler: isSpoiler,
         media_type: type,
         media_id: id,
+        title: title
       };
       api.post('/api/comment', newReview, config)
         .then(response => {

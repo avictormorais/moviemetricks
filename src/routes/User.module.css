@@ -28,3 +28,17 @@
   padding-inline: 15px;
   border-radius: 5px;
 }
+
+.divReviews{
+  width: 90%;
+  background-color: var(--corClaro);
+  border-radius: 10px;
+  margin-top: 15px;
+}
+
+.divReviews h1{
+  text-align: left;
+  font-size: 1.2em;
+  margin-block: 15px;
+  margin-left: 25px;
+}

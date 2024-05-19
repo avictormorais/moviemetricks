@@ -3,7 +3,7 @@ import styles from "./Review.module.css";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
 
-function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handleGetReviews}){
+function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handleGetReviews, redirectToContent, mediaType, mediaId}){
 
   const handleSpoilerClick = (e) => {
     if (isSpoiler) {
@@ -59,7 +59,11 @@ function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handl
           {stars === 4 && <FaRegFaceSmileBeam className={styles.IconProfilePic}/>}
           {stars === 5 && <FaRegFaceGrinHearts className={styles.IconProfilePic}/>}
         </div>
-        <Link to={`/u/${userName}`} className={styles.LinkProfile}>{userName}</Link>
+        {redirectToContent ? (
+          <Link to={`/details/${mediaType}/${mediaId}`} className={styles.LinkProfile}>{userName}</Link>
+        ) : (
+          <Link to={`/u/${userName}`} className={styles.LinkProfile}>{userName}</Link>
+        )}
         <span />
         {Array.from({ length: stars }, (_, index) => (
           <FaStar key={index} className={styles.FiledStar} />

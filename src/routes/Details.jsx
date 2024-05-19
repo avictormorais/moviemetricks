@@ -74,7 +74,7 @@ function Details() {
           {tipo === 'tv' && content && (
             <CardsSeasons temporadas={content.seasons} id={id} />
           )}
-          {tipo && id && <CardReviews type={tipo} id={id} />}
+          {tipo && id && <CardReviews type={tipo} id={id} title={content.name || content.title} />}
           <WhereToWatch id={id} tipo={tipo} region={'BR'}/>
           <SectionMoreInfo content={content} />
         </>
