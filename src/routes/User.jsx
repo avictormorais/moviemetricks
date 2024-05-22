@@ -17,12 +17,14 @@ function User() {
   const [notFound, setNotFound] = useState(false);
   const [notLogged, setNotLogged] = useState(false);
   const [isOwner, setIsOwner] = useState(false);
+  const [loaded, setLoaded] = useState(false);
 
   const { username } = useParams();
 
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
       setNotLogged(true);
+      setLoaded(true)
     } else {
       const config = {
         headers: {
@@ -39,6 +41,7 @@ function User() {
           setIsOwner(response.data.isOwner)
           const moviesList = watchedMedia.filter(item => item.media_type === 'movie');
           const tvShowsList = watchedMedia.filter(item => item.media_type === 'tv');
+          setLoaded(true)
           setMovies(moviesList);
           setTvShows(tvShowsList);
           api.get(`/api/comment/user/${username}`, config)
@@ -49,6 +52,7 @@ function User() {
         })
         .catch(error => {
           if (error.response.status == 404) {
+            setLoaded(true)
             setNotFound(true);
           };
         });
@@ -56,7 +60,7 @@ function User() {
   }, [username]);
 
   return (
-    !notFound || !notLogged ? (
+    loaded ? (
       <>
         {notLogged && (
           <div className={styles.notLogged}>
