@@ -56,7 +56,7 @@ function User() {
   }, [username]);
 
   return (
-    tvShows ? (
+    !notFound || !notLogged ? (
       <>
         {notLogged && (
           <div className={styles.notLogged}>
