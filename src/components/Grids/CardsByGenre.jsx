@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from './CardsByGenre.module.css';
 import CardPoster from "../Cards/CardPoster";
 import api from "../../services/api";
+import noImage from '../../assets/SI.png';
 
 function ContainerCards({ title, type, showGenres, list }) {
     const [content, setContent] = useState(null);
@@ -69,17 +70,15 @@ function ContainerCards({ title, type, showGenres, list }) {
                     })
                 )}
                 {!showGenres && list && (
-                    list.map(item => {
-                        return (
-                            <CardPoster key={item.tmdb_id}
-                                img={`https://image.tmdb.org/t/p/w500/${item.poster_path}`}
-                                title={item.title}
-                                estrelas={item.vote_average / 2}
-                                id={item.tmdb_id}
-                                tipo={item.media_type}
-                            ></CardPoster>
-                        );
-                    })
+                    [...new Map(list.map(item => [item.tmdb_id || item.id, item])).values()].map(item => (
+                        <CardPoster key={item.tmdb_id || item.id}
+                            img={item.poster_path ? `https://image.tmdb.org/t/p/w500/${item.poster_path}` : noImage}
+                            title={item.title || item.name}
+                            estrelas={item.vote_average / 2}
+                            id={item.tmdb_id || item.id}
+                            tipo={item.media_type}
+                        />
+                    ))
                 )}
             </div>
         </div>
