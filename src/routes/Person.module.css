@@ -18,7 +18,33 @@
   width: 100%;
   flex-direction: column;
   align-items: start;
+  justify-content: start;
   padding-left: 15px;
+  height: 367px;
+}
+
+.isPerson{
+  background-color: var(--corClaro);
+  padding: 10px;
+  border-radius: 50px;
+  padding-inline: 15px;
+  margin-bottom: auto;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.isPerson p{
+  font-weight: bold;
+  font-size: .7em;
+  opacity: .7;
+}
+
+.isPerson:hover{
+  border-radius: 5px;
+}
+
+.isPerson:hover p{
+  opacity: 1;
 }
 
 .divInfos h1{
@@ -138,6 +164,12 @@
     justify-content: center;
     align-items: center;
   }
+  .divInfos{
+    height: auto;
+  }
+  .isPerson{
+    margin-right: 15px;
+  }
 }
 
 @media screen and (max-width: 650px){
@@ -146,5 +178,6 @@
   }
   .divInfos{
     margin-top: 15px;
+    height: auto;
   }
 }

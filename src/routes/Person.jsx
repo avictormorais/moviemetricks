@@ -63,6 +63,9 @@ function Person() {
               <div className={styles.divInfosPerson}>
                 <img src={`https://image.tmdb.org/t/p/w300/${content.profile_path}` || noImage} alt="" />
                 <div className={styles.divInfos}>
+                  <div className={styles.isPerson}>
+                    <p>Você é {content.name}?</p>
+                  </div>
                   <h1>{content.name}</h1>
                   {/*<h2>@user</h2>*/}
                   {content.place_of_birth && (
