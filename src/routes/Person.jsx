@@ -26,11 +26,11 @@ function Person() {
   const [logged, setLogged] = useState(true);
 
   const navigate = useNavigate()
-  
+
   const handleIsPerson = () => {
     if (!localStorage.getItem('accessToken')) {
       navigate('/login');
-    } else{
+    } else {
       const config = {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -38,19 +38,19 @@ function Person() {
       };
 
       api.get(`/api/user/profile`, config)
-      .then(response => {
-        api.post(`/api/person`, {
-          username: response.data.username,
-          personId: id
+        .then(response => {
+          api.post(`/api/person`, {
+            username: response.data.username,
+            personId: id
+          })
+            .then(response => {
+              console.log(response)
+              navigate('/');
+            })
+            .catch(error => {
+              console.log(error.response.data)
+            })
         })
-          .then(response => {
-            console.log(response)
-            navigate('/');
-          })
-          .catch(error => {
-            console.log(error.response.data)
-          })
-      })
     }
   }
 
@@ -74,7 +74,7 @@ function Person() {
                 setComments(response.data.comments.reverse())
               })
 
-            api.get(`/api/user/watched`, config)
+            api.get(`/api/user/watched/${response.data.username}`, config)
               .then(response => {
                 const watchedMedia = response.data.watched_media;
                 const moviesList = watchedMedia.filter(item => item.media_type === 'movie');

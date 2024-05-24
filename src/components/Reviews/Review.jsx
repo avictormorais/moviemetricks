@@ -8,7 +8,7 @@ function Review({ handleGetReviews, content, isOwner, isAdmin, redirectToContent
   const [personId, setPersonId] = useState(null);
 
   const handleSpoilerClick = (e) => {
-    if (isSpoiler) {
+    if (content.is_spoiler) {
       e.target.classList.toggle(styles.Spoiler);
     }
   };
