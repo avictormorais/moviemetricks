@@ -116,7 +116,7 @@ function Review({ handleGetReviews, content, isOwner, isAdmin, redirectToContent
           <FaFlag className={styles.Flag} />
         </div>
       </div>
-      {content.isSpoiler ? (
+      {content.is_spoiler ? (
         <p className={styles.Spoiler} data-testid='review' onClick={handleSpoilerClick}>
           {content.review}
         </p>
