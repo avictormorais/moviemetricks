@@ -1,5 +1,6 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { redirect, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import api from '../services/api';
 import ProfileInfos from '../components/Sections/ProfileInfos';
@@ -20,6 +21,7 @@ function User() {
   const [loaded, setLoaded] = useState(false);
 
   const { username } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
@@ -34,6 +36,17 @@ function User() {
           username: username
         }
       };
+
+      api.get(`/api/personByUser/${username}`)
+        .then(response => {
+          if (response.data.personId) {
+            console.log(response.data.personId)
+            navigate(`/person/${response.data.personId}`)
+          }
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
 
       api.get(`/api/user/get_profile`, config)
         .then(response => {
@@ -90,14 +103,8 @@ function User() {
                 {comments.map((comment) => (
                   <Review
                     key={`${comment.username}_${comment.review}`}
-                    id={comment._id}
-                    userName={comment.title ? (comment.media_type === 'tv' ? `${comment.title} (Série)` : `${comment.title} (Filme)`) : comment.username}
-                    review={comment.review}
-                    isSpoiler={comment.is_spoiler}
-                    stars={comment.stars}
+                    content={comment}
                     redirectToContent={true}
-                    mediaId={comment.media_id}
-                    mediaType={comment.media_type}
                   />
                 ))}
               </div>

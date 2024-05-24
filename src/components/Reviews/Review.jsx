@@ -1,15 +1,34 @@
-import { FaStar, FaRegStar, FaFlag, FaPen, FaTrash, FaRegFaceAngry, FaRegFaceMeh, FaRegFaceSmile, FaRegFaceSmileBeam, FaRegFaceGrinHearts } from "react-icons/fa6";
+import { FaStar, FaRegStar, FaFlag, FaPen, FaTrash, FaRegFaceAngry, FaRegFaceMeh, FaRegFaceSmile, FaRegFaceSmileBeam, FaRegFaceGrinHearts, FaMasksTheater } from "react-icons/fa6";
 import styles from "./Review.module.css";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
-function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handleGetReviews, redirectToContent, mediaType, mediaId}){
+function Review({ handleGetReviews, content, isOwner, isAdmin, redirectToContent }) {
+  const [personId, setPersonId] = useState(null);
 
   const handleSpoilerClick = (e) => {
     if (isSpoiler) {
       e.target.classList.toggle(styles.Spoiler);
     }
   };
+
+  if (content.userRole === 'person') {
+    if (localStorage.getItem('accessToken')) {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      };
+
+      api.get(`/api/personByUser/${content.username}`, config)
+        .then(response => {
+          if (response.data.personId) {
+            setPersonId(response.data.personId)
+          }
+        })
+    }
+  }
 
   const handleEditComment = () => {
     const config = {
@@ -24,13 +43,13 @@ function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handl
       is_spoiler: false,
     };
 
-    api.put(`/api/comment/${id}`, editedComment, config)
+    api.put(`/api/comment/${content._id}`, editedComment, config)
       .then(response => {
         handleGetReviews();
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   const handleDeletePost = () => {
@@ -40,53 +59,69 @@ function Review({stars, review, userName, isSpoiler, isOwner, isAdmin, id, handl
       }
     };
 
-    api.delete(`/api/comment/${id}`, config)
+    api.delete(`/api/comment/${content._id}`, config)
       .then(response => {
         handleGetReviews();
-    })
-    .catch(error => {
-      console.log(error);
-    });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
-  
+
   return (
     <div className={styles.Review}>
       <div className={styles.DivInfosReview}>
         <div className={styles.divProfilePic}>
-          {stars === 1 && <FaRegFaceAngry className={styles.IconProfilePic}/>}
-          {stars === 2 && <FaRegFaceMeh className={styles.IconProfilePic}/>}
-          {stars === 3 && <FaRegFaceSmile className={styles.IconProfilePic}/>}
-          {stars === 4 && <FaRegFaceSmileBeam className={styles.IconProfilePic}/>}
-          {stars === 5 && <FaRegFaceGrinHearts className={styles.IconProfilePic}/>}
+          {content.stars === 1 && <FaRegFaceAngry className={styles.IconProfilePic} />}
+          {content.stars === 2 && <FaRegFaceMeh className={styles.IconProfilePic} />}
+          {content.stars === 3 && <FaRegFaceSmile className={styles.IconProfilePic} />}
+          {content.stars === 4 && <FaRegFaceSmileBeam className={styles.IconProfilePic} />}
+          {content.stars === 5 && <FaRegFaceGrinHearts className={styles.IconProfilePic} />}
         </div>
         {redirectToContent ? (
-          <Link to={`/details/${mediaType}/${mediaId}`} className={styles.LinkProfile}>{userName}</Link>
+          <Link to={`/details/${content.media_type}/${content.media_id}`} className={styles.LinkProfile}>{content.title}</Link>
         ) : (
-          <Link to={`/u/${userName}`} className={styles.LinkProfile}>{userName}</Link>
+          <>
+            {personId ? (
+              <Link to={`/person/${personId}`} className={styles.LinkProfile}>{content.username}</Link>
+            ) : (
+              <Link to={`/u/${content.username}`} className={styles.LinkProfile}>{content.username}</Link>
+            )}
+          </>
+        )}
+        {content.userRole && !redirectToContent && (
+          <>
+            {content.userRole === 'person' && (
+              <FaMasksTheater className={styles.IconRole} title="ator/atriz" />
+            )}
+            {content.userRole === 'admin' && (
+              <FaRegStar className={styles.IconRole} title="ADM"/>
+            )}
+          </>
         )}
         <span />
-        {Array.from({ length: stars }, (_, index) => (
+        {Array.from({ length: content.stars }, (_, index) => (
           <FaStar key={index} className={styles.FiledStar} />
         ))}
-        {Array.from({ length: 5 - stars }, (_, index) => (
+        {Array.from({ length: 5 - content.stars }, (_, index) => (
           <FaRegStar key={index} className={styles.EmptyStar} />
         ))}
         <div className={styles.DivIcons}>
           {(isOwner || isAdmin) && (
             <>
               {/*<FaPen className={styles.IconControls} onClick={handleEditComment}/>*/}
-              <FaTrash className={styles.IconControls} onClick={handleDeletePost}/>
+              <FaTrash className={styles.IconControls} onClick={handleDeletePost} />
             </>
           )}
-          <FaFlag className={styles.Flag}/>
+          <FaFlag className={styles.Flag} />
         </div>
       </div>
-      {isSpoiler ? (
+      {content.isSpoiler ? (
         <p className={styles.Spoiler} onClick={handleSpoilerClick}>
-          {review}
+          {content.review}
         </p>
       ) : (
-        <p>{review}</p>
+        <p>{content.review}</p>
       )}
     </div>
   );

@@ -8,6 +8,8 @@ import api from '../services/api';
 import Loading from '../components/Layouts/Loading';
 import CardsByGenre from '../components/Grids/CardsByGenre';
 import noImage from '../assets/SI.png';
+import Review from '../components/Reviews/Review';
+import { useNavigate } from 'react-router-dom';
 
 function Person() {
   const { id } = useParams();
@@ -17,41 +19,111 @@ function Person() {
   const [tvCrew, setTvCrew] = useState(null);
   const [movieCrew, setMovieCrew] = useState(null);
   const [loaded, setLoaded] = useState(false);
+  const [username, setUsername] = useState(null);
+  const [seenTvShows, setSeenTvShows] = useState(null);
+  const [seenMovies, setSeenMovies] = useState(null);
+  const [comments, setComments] = useState(null);
+  const [logged, setLogged] = useState(true);
+
+  const navigate = useNavigate()
+  
+  const handleIsPerson = () => {
+    if (!localStorage.getItem('accessToken')) {
+      navigate('/login');
+    } else{
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      };
+
+      api.get(`/api/user/profile`, config)
+      .then(response => {
+        api.post(`/api/person`, {
+          username: response.data.username,
+          personId: id
+        })
+          .then(response => {
+            console.log(response)
+            navigate('/');
+          })
+          .catch(error => {
+            console.log(error.response.data)
+          })
+      })
+    }
+  }
 
   useEffect(() => {
-    api.get(`/tmdb/person?&id=${id}`)
-      .then(response => {
-        setContent(response.data.person);
-        let tvs = 0
-        let movies = 0
-        response.data.person.combined_credits.cast.forEach(work => {
-          if (work.media_type == 'movie') {
-            movies += 1;
-          } else {
-            tvs += 1;
-          }
-        });
-        setMovies(movies);
-        setTvShows(tvs);
+    if (!localStorage.getItem('accessToken')) {
+      setLogged(false);
+      setLoaded(true)
+    } else {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        }
+      };
 
-        let tvsCrew = 0
-        let moviesCrew = 0
-        response.data.person.combined_credits.crew.forEach(work => {
-          if (work.media_type == 'movie') {
-            moviesCrew += 1;
-          } else {
-            tvsCrew += 1;
-          }
-        });
-        setMovieCrew(moviesCrew);
-        setTvCrew(tvsCrew);
-        setLoaded(true);
-      })
-      .catch(error => {
-        setLoaded(true);
-        console.log(error);
-      });
+      api.get(`/api/person/${id}`)
+        .then(response => {
+          if (response.data.username) {
+            setUsername(response.data.username)
+            api.get(`/api/comment/user/${response.data.username}`)
+              .then(response => {
+                setComments(response.data.comments.reverse())
+              })
 
+            api.get(`/api/user/watched`, config)
+              .then(response => {
+                const watchedMedia = response.data.watched_media;
+                const moviesList = watchedMedia.filter(item => item.media_type === 'movie');
+                const tvShowsList = watchedMedia.filter(item => item.media_type === 'tv');
+                setSeenMovies(moviesList);
+                setSeenTvShows(tvShowsList);
+              })
+              .catch(error => {
+                console.log(error);
+              });
+          }
+        })
+        .catch(error => {
+          console.log(error)
+        })
+
+      api.get(`/tmdb/person?&id=${id}`)
+        .then(response => {
+          setContent(response.data.person);
+          let tvs = 0
+          let movies = 0
+          response.data.person.combined_credits.cast.forEach(work => {
+            if (work.media_type == 'movie') {
+              movies += 1;
+            } else {
+              tvs += 1;
+            }
+          });
+          setMovies(movies);
+          setTvShows(tvs);
+
+          let tvsCrew = 0
+          let moviesCrew = 0
+          response.data.person.combined_credits.crew.forEach(work => {
+            if (work.media_type == 'movie') {
+              moviesCrew += 1;
+            } else {
+              tvsCrew += 1;
+            }
+          });
+          setMovieCrew(moviesCrew);
+          setTvCrew(tvsCrew);
+          setLoaded(true);
+        })
+        .catch(error => {
+          setLoaded(true);
+          console.log(error);
+        });
+    }
   }, [id]);
 
   return (
@@ -63,11 +135,13 @@ function Person() {
               <div className={styles.divInfosPerson}>
                 <img src={`https://image.tmdb.org/t/p/w300/${content.profile_path}` || noImage} alt="" />
                 <div className={styles.divInfos}>
-                  <div className={styles.isPerson}>
+                  <div className={styles.isPerson} onClick={handleIsPerson}>
                     <p>Você é {content.name}?</p>
                   </div>
                   <h1>{content.name}</h1>
-                  {/*<h2>@user</h2>*/}
+                  {username && (
+                    <h2>@{username}</h2>
+                  )}
                   {content.place_of_birth && (
                     <span>
                       <FaGlobeAmericas className={styles.localIcon} />
@@ -107,6 +181,7 @@ function Person() {
                         </span>
                       </div>
                     ) : null}
+
 
                     {tvShows || movies ? (
                       <div className={styles.divInfo}>
@@ -148,6 +223,28 @@ function Person() {
                 <p className={styles.biography}>{content.biography}</p>
               )}
 
+              {comments && comments.length > 0 && (
+                <div className={styles.divReviews}>
+                  <h1>Avaliações feitas por {username}</h1>
+                  <div>
+                    {comments.map((comment) => (
+                      <Review
+                        key={`${comment.username}_${comment.review}`}
+                        content={comment}
+                        redirectToContent={true}
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {seenTvShows && seenTvShows.length > 0 && (
+                <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={seenTvShows} />
+              )}
+
+              {seenMovies && seenMovies.length > 0 && (
+                <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={seenMovies} />
+              )}
 
               {tvShows || movies ? (
                 <CardsByGenre title={"Atuou em"} type={"movie"} showGenres={false} list={content.combined_credits.cast} />
@@ -161,7 +258,8 @@ function Person() {
           ) : (
             <div className={styles.notFound}>
               <FaUserSlash />
-              <h1>Pessoa não encontrada.</h1>
+              <h1>Algo errado aconteceu!</h1>
+              {logged ? <h2>Pessoa não encontrada.</h2> : <h2>Você precisa estar logado para acessar essa página.</h2>}
             </div>
           )}
         </>

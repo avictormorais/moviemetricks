@@ -119,6 +119,14 @@
     text-align: center;
 }
 
+.nameText{
+    font-size: 1.5em;
+    font-weight: bolder;
+    text-align: left;
+    width: 94%;
+    margin-top: 15%;
+}
+
 @media (max-width: 700px) {
     .Destaque {
         height: 80vh;

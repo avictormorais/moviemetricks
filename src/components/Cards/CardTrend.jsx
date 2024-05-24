@@ -36,7 +36,11 @@ function CardTrend({ id, tipo, isMiddlePage, isDetails}) {
         isDetails ? (
             <div className={styles.Destaque} onClick={redirecionar} style={backgroundImageStyle}>
                 <div className={destaqueClasses}>
-                    <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
+                    {logo ? (
+                        <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
+                    ) : (
+                        <h1 className={styles.nameText}>{content?.name || content?.title}</h1>
+                    )}
                     <p className={styles.Overview}>{content?.overview}</p>
                     <div className={styles.Infos}>
                         <FaStar />

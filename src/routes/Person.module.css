@@ -158,6 +158,28 @@
   font-weight: bold;
 }
 
+.notFound h2{
+  font-size: .8em;
+  margin-top: 10px;
+  font-weight: bold;
+  opacity: .7;
+}
+
+.divReviews{
+  width: 100%;
+  background-color: var(--corClaro);
+  border-radius: 10px;
+  margin-top: 20px;
+  padding-block: 5px;
+}
+
+.divReviews h1{
+  text-align: left;
+  font-size: .95em;
+  margin-block: 15px;
+  margin-left: 25px;
+}
+
 @media screen and (max-width: 800px){
   .divInfosPerson{
     flex-direction: column;

@@ -34,6 +34,11 @@
   margin-inline: 10px;
 }
 
+.IconRole{
+  font-size: 1.2em;
+  margin-left: 10px;
+}
+
 .FiledStar, .EmptyStar{
   margin-right: 3px;
   font-size: .75em;
