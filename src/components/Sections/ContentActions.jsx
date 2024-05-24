@@ -76,7 +76,7 @@ function ContentActions({tipo, id, onTrailerCLick}){
         <h2>Ver trailer</h2>
       </div>
       {seen ? <h2 className={styles.MarkAsSeen} onClick={handleMarkAsSeen}>Visto</h2> : <h2 className={styles.MarkAsSeen} onClick={handleMarkAsSeen}>Marcar como visto</h2>}
-      {seen ? <FaRegEye className={styles.Eye} onClick={handleMarkAsSeen}/> : <FaRegEyeSlash className={styles.Eye} onClick={handleMarkAsSeen}/>}
+      {seen ? <FaRegEye data-testid="eye-icon" className={styles.Eye} onClick={handleMarkAsSeen}/> : <FaRegEyeSlash data-testid="eye-icon" className={styles.Eye} onClick={handleMarkAsSeen}/>}
       <FaEllipsisVertical className={styles.Ellipsis}/>
     </div>
   )

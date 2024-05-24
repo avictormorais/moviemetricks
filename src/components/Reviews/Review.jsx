@@ -117,11 +117,11 @@ function Review({ handleGetReviews, content, isOwner, isAdmin, redirectToContent
         </div>
       </div>
       {content.isSpoiler ? (
-        <p className={styles.Spoiler} onClick={handleSpoilerClick}>
+        <p className={styles.Spoiler} data-testid='review' onClick={handleSpoilerClick}>
           {content.review}
         </p>
       ) : (
-        <p>{content.review}</p>
+        <p data-testid='review'>{content.review}</p>
       )}
     </div>
   );

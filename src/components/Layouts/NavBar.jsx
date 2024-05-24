@@ -32,13 +32,13 @@ const NavBar = () => {
             </Link>
             <div className={styles.navbarIcons}>
                 <Link to={accessToken != 'undefined' && accessToken != null ? '/profile' : '/login'}>
-                    <div className={styles.navbarIcon}>
-                        <FaUser />
+                    <div className={styles.navbarIcon} data-testid="btn-profile">
+                        <FaUser alt='Perfil'/>
                     </div>
                 </Link>
                 <Link to={'/search/'}>
-                    <div className={styles.navbarSearch}>
-                        <FaSearch />
+                    <div className={styles.navbarSearch} data-testid="btn-search">
+                        <FaSearch alt='Pesquisa'/>
                     </div>
                 </Link>
             </div>

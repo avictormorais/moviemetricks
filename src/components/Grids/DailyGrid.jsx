@@ -17,7 +17,7 @@ function DailyGrid({tipo}) {
     }, []);
 
     return (
-        <div className={styles.DailyGrid}>
+        <div data-testid="daily-grid" className={styles.DailyGrid}>
             {trends.map(trend => (
                 <CardDaily
                     key={trend.id}

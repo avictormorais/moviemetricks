@@ -14,14 +14,7 @@ function CardTrend({ id, tipo, isMiddlePage, isDetails}) {
             setContent(response.data.trend);
             setLogo(response.data.trend_logo)
         })
-        .catch(error => {
-            console.log(error);
-        });
     }, [id]);
-
-    function redirecionar() {
-        console.log("Clicou card");
-    }
 
     const backgroundImageStyle = content ? { backgroundImage: `url(https://image.tmdb.org/t/p/original${content.backdrop_path})` } : {};
     let ageRating
@@ -34,7 +27,7 @@ function CardTrend({ id, tipo, isMiddlePage, isDetails}) {
 
     return (
         isDetails ? (
-            <div className={styles.Destaque} onClick={redirecionar} style={backgroundImageStyle}>
+            <div className={styles.Destaque} style={backgroundImageStyle} data-testid={'card-trend-details'}>
                 <div className={destaqueClasses}>
                     {logo ? (
                         <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
@@ -57,7 +50,7 @@ function CardTrend({ id, tipo, isMiddlePage, isDetails}) {
                 </div>
             </div>
         ) : (
-            <Link to={`/details/${tipo}/${id}`} className={styles.Destaque} onClick={redirecionar} style={backgroundImageStyle}>
+            <Link to={`/details/${tipo}/${id}`} className={styles.Destaque} style={backgroundImageStyle} data-testid={'card-trend'}>
                 <div className={destaqueClasses}>
                     <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
                     <p className={styles.Overview}>{content?.overview}</p>
