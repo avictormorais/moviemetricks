@@ -1,4 +1,6 @@
 import { FaStar, FaRegStar, FaFlag, FaPen, FaTrash, FaRegFaceAngry, FaRegFaceMeh, FaRegFaceSmile, FaRegFaceSmileBeam, FaRegFaceGrinHearts, FaMasksTheater } from "react-icons/fa6";
+import { FaTools } from "react-icons/fa";
+import { BiSolidBadgeCheck } from "react-icons/bi";
 import styles from "./Review.module.css";
 import api from "../../services/api";
 import { Link } from "react-router-dom";
@@ -89,13 +91,17 @@ function Review({ handleGetReviews, content, isOwner, isAdmin, redirectToContent
             )}
           </>
         )}
+        {content.userRole ? console.log(content.userRole) : console.log('não tem')}
         {content.userRole && !redirectToContent && (
           <>
             {content.userRole === 'person' && (
               <FaMasksTheater className={styles.IconRole} title="ator/atriz" />
             )}
             {content.userRole === 'admin' && (
-              <FaRegStar className={styles.IconRole} title="ADM"/>
+              <FaTools className={styles.IconRole} title="Administrador"/>
+            )}
+            {content.userRole === 'curator' && (
+              <BiSolidBadgeCheck className={styles.IconRole} title="Curador"/>
             )}
           </>
         )}
