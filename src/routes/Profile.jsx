@@ -6,15 +6,15 @@ import ProfileInfos from '../components/Sections/ProfileInfos';
 import CardsByGenre from '../components/Grids/CardsByGenre';
 import { useState } from 'react';
 import Loading from '../components/Layouts/Loading';
+import Review from '../components/Reviews/Review';
 
 function Profile() {
-  const navigate = useNavigate();
   const [movies, setMovies] = useState(null);
   const [username, setUsername] = useState(null);
   const [tvShows, setTvShows] = useState(null);
   const [showEdit, setShowEdit] = useState(false);
+  const [comments, setComments] = useState([]);
 
-  
   const [novaSenha, setNovaSenha] = useState('');
   const [usernameEdit, setUsernameEdit] = useState('');
   const [email, setEmail] = useState('');
@@ -24,6 +24,8 @@ function Profile() {
     const lowercaseUsername = event.target.value.toLowerCase();
     setUsernameEdit(lowercaseUsername.replace(/\s/g, ''));
   };
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!localStorage.getItem('accessToken')) {
@@ -36,15 +38,25 @@ function Profile() {
       };
 
       api.get(`/api/user/profile`, config)
-      .then(response => {
-        setUsername(response.data.username)
-        setUsernameEdit(response.data.username)
-        setEmail(response.data.email)
-        api.get(`/api/comment/user/${response.data.username}`, config)
         .then(response => {
-          console.log(response.data)
+          setUsername(response.data.username)
+          api.get(`/api/personByUser/${response.data.username}`)
+            .then(response => {
+              if (response.data.personId) {
+                console.log(response.data.personId)
+                navigate(`/person/${response.data.personId}`)
+              }
+            })
+            .catch(error => {
+              console.log(error.response)
+            })
+          setUsernameEdit(response.data.username)
+          setEmail(response.data.email)
+          api.get(`/api/comment/user/${response.data.username}`, config)
+            .then(response => {
+              setComments(response.data.comments.reverse())
+            })
         })
-      })
 
       api.get(`/api/user/watched`, config)
         .then(response => {
@@ -66,7 +78,7 @@ function Profile() {
 
   const handleSendEdit = () => {
 
-    if(novaSenha) {
+    if (novaSenha) {
       if (novaSenha.length < 6) {
         document.querySelector(`.${styles.pError}`).style.display = 'block';
         document.querySelector(`.${styles.pError}`).innerHTML = 'A senha deve ter no mínimo 6 caracteres.';
@@ -74,13 +86,13 @@ function Profile() {
       }
     }
 
-    if(!usernameEdit){
+    if (!usernameEdit) {
       document.querySelector(`.${styles.pError}`).style.display = 'block';
       document.querySelector(`.${styles.pError}`).innerHTML = 'Por favor, insira um nome de usuário.';
       return;
     }
 
-    if (email.indexOf('@') === -1 || email.indexOf('.') === -1){
+    if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
       document.querySelector(`.${styles.pError}`).style.display = 'block';
       document.querySelector(`.${styles.pError}`).innerHTML = 'Por favor, insira um email válido.';
       return;
@@ -88,7 +100,7 @@ function Profile() {
 
     const config = {
       headers: {
-      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+        Authorization: `Bearer ${localStorage.getItem('accessToken')}`
       }
     };
 
@@ -98,21 +110,21 @@ function Profile() {
     data.append('email', email);
 
     api.put(`/api/user/profile`, data, config)
-    .then(response => {
-      console.log(response.data)
-      navigate('/', { replace: true });
-    })
-    .catch(error => {
-      if(error.response.status === 401){
-        document.querySelector(`.${styles.pError}`).style.display = 'block';
-        document.querySelector(`.${styles.pError}`).innerHTML = 'Email já cadastrado.';
-        return;
-      } if(error.response.status === 400){
-        document.querySelector(`.${styles.pError}`).style.display = 'block';
-        document.querySelector(`.${styles.pError}`).innerHTML = 'Username já em uso.';
-        return;
-      }
-    });
+      .then(response => {
+        console.log(response.data)
+        navigate('/', { replace: true });
+      })
+      .catch(error => {
+        if (error.response.status === 401) {
+          document.querySelector(`.${styles.pError}`).style.display = 'block';
+          document.querySelector(`.${styles.pError}`).innerHTML = 'Email já cadastrado.';
+          return;
+        } if (error.response.status === 400) {
+          document.querySelector(`.${styles.pError}`).style.display = 'block';
+          document.querySelector(`.${styles.pError}`).innerHTML = 'Username já em uso.';
+          return;
+        }
+      });
 
   }
 
@@ -120,7 +132,7 @@ function Profile() {
     <div className={styles.divProfile}>
       {movies && tvShows && username ? (
         <>
-          <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} handleEdit={handleEdit} />
+          <ProfileInfos username={username} tvShows={tvShows.length} movies={movies.length} handleEdit={handleEdit} showEdit={true} showLogout={true} />
           {showEdit && (
             <>
               <h1 className={styles.EditTitle}>Editar perfil</h1>
@@ -137,20 +149,20 @@ function Profile() {
                 <div className={styles.divInput}>
                   <p>Usuário</p>
                   <input
-                        type="text"
-                        placeholder="Nome de usuário"
-                        value={usernameEdit}
-                        onChange={handleUsernameChange}
-                    />
+                    type="text"
+                    placeholder="Nome de usuário"
+                    value={usernameEdit}
+                    onChange={handleUsernameChange}
+                  />
                 </div>
                 <div className={styles.divInput}>
                   <p>Email</p>
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      value={email}
-                      onChange={handleEmailChange}
-                    />
+                  <input
+                    type="text"
+                    placeholder="Email"
+                    value={email}
+                    onChange={handleEmailChange}
+                  />
                 </div>
               </div>
               <div className={styles.ActionsEdit}>
@@ -159,11 +171,23 @@ function Profile() {
               </div>
             </>
           )}
-          <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows}/>
-          <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies}/>
+          <CardsByGenre title={"Séries vistas"} type={"tv"} showGenres={false} list={tvShows} />
+          <CardsByGenre title={"Filmes vistos"} type={"tv"} showGenres={false} list={movies} />
+          <div className={styles.divReviews}>
+            <h1>Avaliações</h1>
+            <div>
+              {comments.map((comment) => (
+                <Review
+                  key={`${comment.username}_${comment.review}`}
+                  content={comment}
+                  redirectToContent={true}
+                />
+              ))}
+            </div>
+          </div>
         </>
       ) : (
-        <Loading/>
+        <Loading />
       )}
     </div>
   );

@@ -1,0 +1,205 @@
+.divInfosPerson{
+  margin-top: 80px;
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: end;
+  width: 90vw;
+}
+
+.divInfosPerson img{
+  border-radius: 5px;
+  width: 245px;
+  height: 367px;
+}
+
+.divInfos{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: start;
+  justify-content: start;
+  padding-left: 15px;
+  height: 367px;
+}
+
+.isPerson{
+  background-color: var(--corClaro);
+  padding: 10px;
+  border-radius: 50px;
+  padding-inline: 15px;
+  margin-bottom: auto;
+  margin-left: auto;
+  cursor: pointer;
+}
+
+.isPerson p{
+  font-weight: bold;
+  font-size: .7em;
+  opacity: .7;
+}
+
+.isPerson:hover{
+  border-radius: 5px;
+}
+
+.isPerson:hover p{
+  opacity: 1;
+}
+
+.divInfos h1{
+  font-size: 1.5rem;
+  color: var(--corTexto);
+}
+
+.divInfos h2{
+  font-size: 1rem;
+  color: var(--corTexto);
+  opacity: .5;
+  margin-block: 3px;
+}
+
+.divInfos span{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin-block: 7px;
+}
+
+.localIcon{
+  font-size: 1.25em;
+  margin-right: 5px;
+}
+
+.local{
+  font-size: 1em;
+  margin-right: 5px;
+  opacity: .7;
+}
+
+.divListInfos{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: start;
+  margin-top: 5px;
+  flex-wrap: wrap;
+}
+
+.divInfo{
+  margin-right: 25px;
+}
+
+.divListInfos h3{
+  font-size: 1rem;
+  color: var(--corTexto);
+  text-align: left;
+}
+
+.titleInfo{
+  font-size: 1.25rem;
+  color: var(--corTexto);
+}
+
+.iconInfo{
+  font-size: 1em;
+  margin-right: 5px;
+}
+
+.spanInfo{
+  width: 100%;
+}
+
+.spanInfo h4{
+  font-size: .85rem;
+  color: var(--corTexto);
+  opacity: .7;
+}
+
+.iconSocialMedia{
+  opacity: .7;
+  font-size: 1.3em;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.iconSocialMedia:hover{
+  opacity: 1;
+}
+
+.biography{
+  font-size: .8em;
+  text-align: left;
+  width: 90vw;
+  font-weight: bold;
+  opacity: .7;
+  margin-block: 15px;
+}
+
+.notFound{
+  width: 100%;
+  height: calc(100vh - 175px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.notFound svg{
+  font-size: 80px;
+  margin-bottom: 15px;
+}
+
+.notFound h1{
+  font-size: 1em;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+.notFound h2{
+  font-size: .8em;
+  margin-top: 10px;
+  font-weight: bold;
+  opacity: .7;
+}
+
+.divReviews{
+  width: 100%;
+  background-color: var(--corClaro);
+  border-radius: 10px;
+  margin-top: 20px;
+  padding-block: 5px;
+}
+
+.divReviews h1{
+  text-align: left;
+  font-size: .95em;
+  margin-block: 15px;
+  margin-left: 25px;
+}
+
+@media screen and (max-width: 800px){
+  .divInfosPerson{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .divInfos{
+    height: auto;
+  }
+  .isPerson{
+    margin-right: 15px;
+  }
+}
+
+@media screen and (max-width: 650px){
+  .divInfo{
+    margin-block: 10px;
+  }
+  .divInfos{
+    margin-top: 15px;
+    height: auto;
+  }
+}

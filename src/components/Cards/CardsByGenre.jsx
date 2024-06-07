@@ -40,7 +40,7 @@ function ContainerCards({ title, type }) {
     };
 
     return (
-        <div className={styles.ContainerCards}>
+        <div className={styles.ContainerCards} data-testid="container-cards">
             <h2>{selectedGenre ? selectedGenre : title}</h2>
             <div className={styles.divGeneros}>
                 {content && content.genres.map(genero => (

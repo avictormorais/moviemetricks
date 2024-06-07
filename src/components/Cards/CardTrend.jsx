@@ -4,43 +4,40 @@ import { Link } from 'react-router-dom';
 import styles from './CardTrend.module.css';
 import api from "../../services/api";
 
-function CardTrend({ id, tipo, isMiddlePage, isDetails}) {
+function CardTrend({ id, tipo, isMiddlePage, isDetails }) {
     const [content, setContent] = useState(null);
     const [logo, setLogo] = useState(null);
 
     useEffect(() => {
         api.get(`/tmdb/details?tipo=${tipo}&id=${id}`)
-        .then(response => {
-            setContent(response.data.trend);
-            setLogo(response.data.trend_logo)
-        })
-        .catch(error => {
-            console.log(error);
-        });
+            .then(response => {
+                setContent(response.data.trend);
+                setLogo(response.data.trend_logo)
+            })
     }, [id]);
-
-    function redirecionar() {
-        console.log("Clicou card");
-    }
 
     const backgroundImageStyle = content ? { backgroundImage: `url(https://image.tmdb.org/t/p/original${content.backdrop_path})` } : {};
     let ageRating
-    if(tipo === "tv") {
+    if (tipo === "tv") {
         ageRating = content?.content_ratings?.results.find(item => item.iso_3166_1 === "BR")?.rating || content?.content_ratings?.results.find(item => /^\d+$/.test(item.iso_3166_1))?.rating || '?';
-    } else{
+    } else {
         ageRating = content?.releases?.countries.find(item => item.iso_3166_1 === "BR")?.certification || '?';
     }
     const destaqueClasses = isMiddlePage ? `${styles.Fade} ${styles.MiddlePage}` : styles.Fade;
 
     return (
         isDetails ? (
-            <div className={styles.Destaque} onClick={redirecionar} style={backgroundImageStyle}>
+            <div className={styles.Destaque} style={backgroundImageStyle} data-testid={'card-trend-details'}>
                 <div className={destaqueClasses}>
-                    <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
+                    {logo ? (
+                        <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
+                    ) : (
+                        <h1 className={styles.nameText}>{content?.name || content?.title}</h1>
+                    )}
                     <p className={styles.Overview}>{content?.overview}</p>
                     <div className={styles.Infos}>
                         <FaStar />
-                        <h2 className={styles.InfoH2}>{((content?.vote_average.toFixed(1)/2).toFixed(1))}</h2>
+                        <h2 className={styles.InfoH2}>{((content?.vote_average.toFixed(1) / 2).toFixed(1))}</h2>
                         <FaCalendar />
                         <h2 className={styles.InfoH2}>{tipo === "tv" ? content?.first_air_date?.split('-')[0] : content?.release_date?.split('-')[0]}</h2>
                     </div>
@@ -53,13 +50,17 @@ function CardTrend({ id, tipo, isMiddlePage, isDetails}) {
                 </div>
             </div>
         ) : (
-            <Link to={`/details/${tipo}/${id}`} className={styles.Destaque} onClick={redirecionar} style={backgroundImageStyle}>
+            <Link to={`/details/${tipo}/${id}`} className={styles.Destaque} style={backgroundImageStyle} data-testid={'card-trend'}>
                 <div className={destaqueClasses}>
-                    <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
+                    {logo ? (
+                        <img src={`https://image.tmdb.org/t/p/w500${logo}`} alt="" />
+                    ) : (
+                        <h1 className={styles.nameText}>{content?.name || content?.title}</h1>
+                    )}
                     <p className={styles.Overview}>{content?.overview}</p>
                     <div className={styles.Infos}>
                         <FaStar />
-                        <h2 className={styles.InfoH2}>{((content?.vote_average.toFixed(1)/2).toFixed(1))}</h2>
+                        <h2 className={styles.InfoH2}>{((content?.vote_average.toFixed(1) / 2).toFixed(1))}</h2>
                         <FaCalendar />
                         <h2 className={styles.InfoH2}>{tipo === "tv" ? content?.first_air_date?.split('-')[0] : content?.release_date?.split('-')[0]}</h2>
                     </div>

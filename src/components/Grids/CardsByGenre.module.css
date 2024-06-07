@@ -2,7 +2,7 @@
     background: linear-gradient(to bottom, var(--corClaro), transparent 80%);
     border-radius: 10px;
     width: 90vw;
-    min-height: 400px;
+    min-height: 350px;
     margin-top: 50px;
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
     font-weight: bold;
     text-align: left;
     margin-inline: 30px;
-    margin-top: 20px;
+    margin-top: 15px;
     text-align: left;
     width: 95%;
 }
@@ -32,10 +32,11 @@
 .divCards {
     width: 97%;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(175px, 185px)); /* ajuste do tamanho mínimo e máximo */
+    grid-template-columns: repeat(auto-fill, minmax(175px, 185px));
     grid-gap: 0px;
-    justify-content: center; /* centraliza as colunas horizontalmente */
+    justify-content: center;
     align-items: center;
+    margin-top: 5px;
 }
 
 

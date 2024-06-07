@@ -34,13 +34,13 @@ function CardTrendVid({ id, tipo, isMiddlePage, idVideo}) {
     let embedUrl = `https://www.youtube.com/embed/${idVideo}?autoplay=1&loop=1&controls=0&mute=0&loop=1`
 
     return (
-        <Link to={`/details/${tipo}/${id}`} className={styles.Destaque} onClick={redirecionar}>
+        <Link to={`/details/${tipo}/${id}`} className={styles.Destaque} onClick={redirecionar} data-testid={'card-trend-details'}>
             <div className={styles.VideoContainer}>
                 {/*<video autoPlay muted loop className={styles.VideoBackground}>
                     <source src={`https://pipedproxy-yul.kavin.rocks/videoplayback?c=ANDROID&clen=22470587&cpn=Zptr78e7ZWbuduoj&dur=62.333&ei=dNsGZtaACvWAybgP0JS8wA8&expire=1711747028&fexp=51141541&fvip=4&gir=yes&host=rr5---sn-vgqskn6z.googlevideo.com&id=o-ABvOlxvqoJQp-By9XSqBHos1puh6TV_LY5vZsx2UuDvZ&initcwndbps=810000&ip=140.228.21.156&itag=137&keepalive=yes&lmt=1648818016030469&lsig=ALClDIEwRAIgBumIEFaFoEtgRXe6K_wecCTCBJN1SGyWbtg54OxaZfkCIFyNfDPX9Fn_19MLtRvGtNalbo2EsW8ZEoUpO3wZyogf&lsparams=mh%2Cmm%2Cmn%2Cms%2Cmv%2Cmvi%2Cpl%2Cinitcwndbps&mh=aT&mime=video%2Fmp4&mm=31%2C26&mn=sn-vgqskn6z%2Csn-p5qlsndk&ms=au%2Conr&mt=1711724944&mv=m&mvi=5&pl=24&qhash=30333d90&requiressl=yes&sig=AJfQdSswRAIgYVXTTN4x6oImX3WjpE5sYLYGREqchIINKrlgwrVJk04CICjyniec8mikWkiLXiPjjt2nSXOhXR9CYRstJmd-reAZ&source=youtube&sparams=expire%2Cei%2Cip%2Cid%2Citag%2Csource%2Crequiressl%2Cxpc%2Cvprv%2Csvpuc%2Cmime%2Cgir%2Cclen%2Cdur%2Clmt&svpuc=1&txp=5319224&ump=1&vprv=1&xpc=EgVo2aDSNQ%3D%3D`} type="video/mp4" />
                     Seu navegador não suporta vídeos HTML5.
                 </video>*/}
-                <iframe className={styles.VideoBackground} src={embedUrl} height="100px" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; loop; clipboard-write; encrypted-media; gyroscope; web-share" referrerpolicy="strict-origin-when-cross-origin"></iframe>
+                <iframe className={styles.VideoBackground} src={embedUrl} height="100px" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; loop; clipboard-write; encrypted-media; gyroscope; web-share" referrerPolicy="strict-origin-when-cross-origin"></iframe>
                 <div className={destaqueClasses}>
                     <img src={`https://image.tmdb.org/t/p/original${logo}`} alt="" />
                     <p className={styles.Overview}>{content?.overview}</p>
