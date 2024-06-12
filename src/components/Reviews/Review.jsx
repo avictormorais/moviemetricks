@@ -91,7 +91,6 @@ function Review({ handleGetReviews, content, isOwner, isAdmin, redirectToContent
             )}
           </>
         )}
-        {content.userRole ? console.log(content.userRole) : console.log('não tem')}
         {content.userRole && !redirectToContent && (
           <>
             {content.userRole === 'person' && (

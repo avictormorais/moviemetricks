@@ -2,9 +2,11 @@ import styles from './ContentActions.module.css';
 import { FaRegEye, FaRegEyeSlash, FaEllipsisVertical, FaVideo } from "react-icons/fa6";
 import api from '../../services/api';
 import { useEffect, useState } from 'react';
+import ModalPlaylists from '../ModalPlaylists';
 
 function ContentActions({tipo, id, onTrailerCLick}){
   const [seen, setSeen] = useState(null);
+  const [openModal, setOpenModal] = useState(false);
 
   const config = {
     headers: {
@@ -19,6 +21,10 @@ function ContentActions({tipo, id, onTrailerCLick}){
     .catch(error => {
       console.log(error);
     });
+
+    const handleClickMore = () => {
+      setOpenModal(!openModal);
+    };    
 
   const handleMarkAsSeen = () => {
     const config = {
@@ -77,7 +83,8 @@ function ContentActions({tipo, id, onTrailerCLick}){
       </div>
       {seen ? <h2 className={styles.MarkAsSeen} onClick={handleMarkAsSeen}>Visto</h2> : <h2 className={styles.MarkAsSeen} onClick={handleMarkAsSeen}>Marcar como visto</h2>}
       {seen ? <FaRegEye data-testid="eye-icon" className={styles.Eye} onClick={handleMarkAsSeen}/> : <FaRegEyeSlash data-testid="eye-icon" className={styles.Eye} onClick={handleMarkAsSeen}/>}
-      <FaEllipsisVertical className={styles.Ellipsis}/>
+      <FaEllipsisVertical className={styles.Ellipsis} onClick={handleClickMore} />
+      <ModalPlaylists isOpen={openModal} setOpenModal={() => setOpenModal(!openModal)} idContent={id} tipo={tipo}/>
     </div>
   )
 
