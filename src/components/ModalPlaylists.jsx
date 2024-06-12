@@ -5,6 +5,7 @@ import { RiPlayListAddFill } from "react-icons/ri";
 import { useState, useEffect } from "react";
 import api from "../services/api";
 import { FaTrash } from "react-icons/fa";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 const ModalPlaylists = ({ isOpen, setOpenModal, idContent, tipo }) => {
   const [playlists, setPlaylists] = useState([{}]);
@@ -35,7 +36,7 @@ const ModalPlaylists = ({ isOpen, setOpenModal, idContent, tipo }) => {
       },
     };
 
-    console.log(newPlaylist)
+    console.log(newPlaylist);
 
     const data = {
       name: newPlaylist,
@@ -53,7 +54,6 @@ const ModalPlaylists = ({ isOpen, setOpenModal, idContent, tipo }) => {
   };
 
   const handleAddToPlaylist = (id) => {
-    console.log('add ' + idContent + ' - ' + tipo + ' em: ' + id)
     const config = {
       headers: {
         Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -75,8 +75,34 @@ const ModalPlaylists = ({ isOpen, setOpenModal, idContent, tipo }) => {
         console.log(error);
       });
 
-    setOpenModal()
+    setOpenModal();
+  };
+
+  const handleRemoveFromPlaylist = (id) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        'Content-Type': 'application/json',
+      },
+      data: {
+        tmdb_id: idContent,
+        media_type: tipo,
+      },
+    };
+  
+    api
+      .delete(`/api/playlists/${id}/remove`, config)
+      .then((response) => {
+        console.log(response);
+        setOpenModal();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  
+    setOpenModal();
   }
+  
 
   const loadPlaylists = () => {
     const config = {
@@ -119,8 +145,19 @@ const ModalPlaylists = ({ isOpen, setOpenModal, idContent, tipo }) => {
           {playlists.map((playlist) => {
             return (
               <div className={styles.divPlaylist}>
-                <p onClick={() => handleAddToPlaylist(playlist._id)}>{playlist.name}</p>
-                <FaTrash onClick={() => handleDeletePlaylist(playlist._id)} />
+                {playlist.media && playlist.media.some(item => item.tmdb_id === idContent && item.media_type === tipo) ? (
+                  <p onClick={() => handleRemoveFromPlaylist(playlist._id)}>
+                    {playlist.name}
+                  </p>
+                ) : (
+                  <p onClick={() => handleAddToPlaylist(playlist._id)}>
+                    {playlist.name}
+                  </p>
+                )}
+                {playlist.media && playlist.media.some(item => item.tmdb_id === idContent && item.media_type === tipo) && (
+                  <FaRegCheckCircle className={styles.alreadyInList}/>
+                )}
+                <FaTrash onClick={() => handleDeletePlaylist(playlist._id)} className={styles.deleteIcon}/>
               </div>
             );
           })}

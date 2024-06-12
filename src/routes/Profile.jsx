@@ -241,6 +241,7 @@ function Profile() {
               {playlists.map((playlist) => {
                 return (
                   <CardsByGenre
+                    key={playlist.id}
                     title={playlist.name}
                     type={"tv"}
                     showGenres={false}
