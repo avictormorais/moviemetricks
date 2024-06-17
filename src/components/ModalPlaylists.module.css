@@ -1,0 +1,126 @@
+.backgroundModal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalDiv{
+  display: flex;
+  position: fixed;
+  background-color: var(--corClaro);
+  width: 40%;
+  padding: 10px;
+  border-radius: 10px;
+  padding-block: 15px;
+  padding-inline: 20px;
+  min-width: 400px;
+  max-width: 500px;
+  flex-direction: column;
+}
+
+.modalDiv h1{
+  font-size: 1em;
+  width: 100%;
+  text-align: left;
+}
+
+.divTopModal{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.divTopModal svg{
+  margin-left: auto;
+  font-size: 1.4em;
+  cursor: pointer;
+}
+
+.divCreatePlaylist{
+  width: 100%;
+  margin-top: 15px;
+  flex-direction: row;
+  display: flex;
+}
+
+.divCreatePlaylist input{
+  background-color: var(--corFundo);
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  width: 80%;
+  font-weight: bold;
+  color: white;
+  font-size: .8em;
+  margin-right: 10px;
+  text-decoration: none;
+  outline: none;
+}
+
+.divCreatePlaylist button{
+  width: 20%;
+  background-color: var(--corVerde);
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  font-size: .85em;
+  cursor: pointer;
+}
+
+.divNoPlaylist{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-block: 30px;
+}
+
+.divNoPlaylist svg{
+  font-size: 2em;
+}
+
+.divNoPlaylist p{
+  font-weight: bold;
+  font: .65em;
+  margin-top: 10px;
+}
+
+.divPlaylist{
+  background-color: var(--corFundo);
+  width: 100%;
+  margin-inline: auto;
+  border-radius: 10px;
+  padding-block: 10px;
+  cursor: pointer;
+  margin-block: 5px;
+  display: flex;
+  flex-direction: row;
+}
+
+.divPlaylist p{
+  font-weight: bold;
+  font-size: .9em;
+  text-align: left;
+  margin-left: 25px;
+  width: 100%;
+}
+
+.alreadyInList{
+  fill: var(--corVerde);
+  font-size: 1.25em;
+  margin-right: 15px;
+}
+
+.deleteIcon{
+  font-size: 1.15em;
+  margin-right: 10px;
+}

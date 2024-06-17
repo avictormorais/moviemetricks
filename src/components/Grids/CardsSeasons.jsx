@@ -52,7 +52,7 @@ function ContainerCards({ temporadas, id }) {
                     </span>
                     <div className={styles.gridEpisodes}>
                         {seasonContent.episodes.map(item => (
-                            <CardEpisode episode={item} key={item.id}/>
+                            <CardEpisode episode={item} serieId={id} key={item.id}/>
                         ))}
                     </div>
                 </div>

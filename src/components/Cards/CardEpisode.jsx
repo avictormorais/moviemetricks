@@ -1,10 +1,14 @@
 import styles from './CardEpisode.module.css';
 import { FaRegClock, FaCalendarDays, FaStar } from "react-icons/fa6";
 
-function CardEpisode({ episode }) {
+function CardEpisode({ episode, serieId }) {
+
+  function handleClickedEpisode() {
+    console.log(`${serieId}: ${episode.season_number} - ${episode.episode_number}`)
+  }
 
   return (
-    <div className={styles.CardEpisode}>
+    <div className={styles.CardEpisode} onClick={handleClickedEpisode}>
       <div className={styles.BackgroundImg} style={{backgroundImage: `url(https://image.tmdb.org/t/p/w500${episode.still_path})`}}>
         <div className={styles.FadeEpisode}>
           {episode.runtime && (
