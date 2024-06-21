@@ -4,6 +4,7 @@ import CardPoster from "../Cards/CardPoster";
 import { FaArrowLeft } from "react-icons/fa6";
 import api from "../../services/api";
 import CardEpisode from "../Cards/CardEpisode";
+import SI from "../../assets/SI.png";
 
 function ContainerCards({ temporadas, id }) {
     const [seasonContent, setSeasonContent] = useState(null);
@@ -29,11 +30,11 @@ function ContainerCards({ temporadas, id }) {
                     <h2 className={styles.SeasonsH2} style={{ marginBottom: '15px' }}>Temporadas</h2>
                     <div className={styles.divCards}>
                         {temporadas.map(item => (
-                            item.season_number !== 0 && (
+                            item.season_number !== 0 && item.episode_count != 0 && (
                                 <CardPoster
                                     key={item.season_number}
                                     onClick={() => handleSeasonClick(item.season_number)}
-                                    img={`https://image.tmdb.org/t/p/w300${item.poster_path}`}
+                                    img={item.poster_path ? `https://image.tmdb.org/t/p/w300${item.poster_path}` : SI}
                                     title={item.name}
                                     data={item.air_date && item.air_date.split("-")[0]}
                                     eps={item.episode_count && item.episode_count}

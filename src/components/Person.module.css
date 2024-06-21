@@ -23,6 +23,14 @@
 .DivPessoa h1{
   width: auto;
   font-size: 0.7em;
+  font-weight: bold;
+  text-align: center;
+  overflow: hidden;
+}
+
+.DivPessoa h2{
+  width: auto;
+  font-size: 0.55em;
   font-weight: lighter;
   text-align: center;
   overflow: hidden;
