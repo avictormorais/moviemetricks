@@ -86,6 +86,42 @@
     border-radius: 10px;
 }
 
+.DivEpisodeDetails{
+    background-color: var(--corClaro);
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 90vw;
+}
+
+.divBackEp{
+    width: 90vw;
+    margin-inline: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 20px;
+    margin-bottom: 20px;
+}
+
+.divBackEp svg{
+    font-size: 1.4em;
+    margin-right: 10px;
+    margin-block: auto;
+    margin-left: 30px;
+}
+
+.divBackEp svg:hover{
+    cursor: pointer;
+}
+
+.divBackEp h2{
+    font-size: 1.25em;
+    font-weight: bold;
+    text-align: left;
+    text-align: left;
+    width: 95%;
+}
+
 @media (max-width: 700px) {
     .SeasonsH2{
         margin-top: 15px;
