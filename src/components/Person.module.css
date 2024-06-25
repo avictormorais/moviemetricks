@@ -17,7 +17,7 @@
 }
 
 .DivPessoa:hover img{
-  border: 2px solid var(--corVerde);
+  border: 2px solid white;
 }
 
 .DivPessoa h1{
