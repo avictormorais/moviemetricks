@@ -1,10 +1,10 @@
 import styles from './CardEpisode.module.css';
 import { FaRegClock, FaCalendarDays, FaStar } from "react-icons/fa6";
 
-function CardEpisode({ episode, serieId }) {
+function CardEpisode({ episode, serieId, onEpisodeClick }) {
 
   function handleClickedEpisode() {
-    console.log(`${serieId}: ${episode.season_number} - ${episode.episode_number}`)
+    onEpisodeClick(episode);
   }
 
   return (
@@ -35,7 +35,6 @@ function CardEpisode({ episode, serieId }) {
       </div>
     </div>
   )
-
 }
 
 export default CardEpisode;

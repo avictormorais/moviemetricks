@@ -6,7 +6,7 @@
   padding: 0px;
   text-decoration: none;
   color: var(--corTexto);
-  transition: all .5s;
+  transition: color .5s, background-color .5s;
 }
 
 :root{
