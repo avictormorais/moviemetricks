@@ -18,6 +18,20 @@ function ContainerCards({ temporadas, id }) {
       setViewingSeasons(false);
       setSeasonContent(response.data.season);
     });
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+    
+    api.get(`/api/user/watched_episodes/${id}/${seasonNumber}`, config)
+    .then((response) => {
+      setEpisodes(response.data.episodes)
+    })
+    .catch(() => {
+      setEpisodes([])
+    });
   };
 
   useEffect(() => {
@@ -31,12 +45,13 @@ function ContainerCards({ temporadas, id }) {
       api.get(`/api/user/watched_episodes/${id}/${seasonContent.season_number}`, config)
       .then((response) => {
         setEpisodes(response.data.episodes)
+        console.log(episodes)
       })
-      .catch((error) => {
-        
+      .catch(() => {
+        setEpisodes([])
       });
     }
-  }, [viewingSeasons])
+  }, [viewingSeasons, selectedEpisode])
 
   const handleGoBack = () => {
     if (selectedEpisode) {
@@ -102,7 +117,7 @@ function ContainerCards({ temporadas, id }) {
                   <CardEpisode
                     episode={item}
                     serieId={id}
-                    key={item.id}
+                    key={`${item.id}-${episodes}`}
                     onEpisodeClick={() => setSelectedEpisode(item)}
                     seen={episodes.includes(item.episode_number)}
                   />

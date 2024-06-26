@@ -51,7 +51,6 @@ function EpisodeDetails({ episode }) {
       if(seen){
         api.delete(`/api/user/watched_episodes`, { data, ...config })
         .then((response) => {
-          console.log(response);
           setSeen(false)
         })
         .catch((error) => {
@@ -60,7 +59,6 @@ function EpisodeDetails({ episode }) {
       } else{
         api.post(`/api/user/watched_episodes`, data, config)
         .then((response) => {
-          console.log(response);
           setSeen(true)
         })
         .catch((error) => {

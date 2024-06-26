@@ -3,7 +3,6 @@
   border-radius: 10px;
   max-width: 335px;
   overflow: hidden;
-  opacity: .7;
   transition: all .3s;
   display: flex;
   flex-direction: column;
@@ -109,4 +108,21 @@
 
 .EpisodeBottomInfos span p{
   font-size: .8em;
+}
+
+.seenIcon, .unSeenIcon{
+  fill: gray;
+  opacity: 1;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-left: 10px;
+  font-size: 1.2em;
+  z-index: 100;
+  background-color: rgba(1,1,1, 0.5);
+  padding: 5px;
+  border-radius: 100%;
+}
+
+.seenIcon{
+  fill: white;
 }
