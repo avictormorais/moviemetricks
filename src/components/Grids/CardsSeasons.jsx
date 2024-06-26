@@ -78,7 +78,7 @@ function ContainerCards({ temporadas, id }) {
         <div className={styles.ContainerCards}>
           {viewingSeasons ? (
             <div className={styles.DivSeasons}>
-              <h2 className={styles.SeasonsH2} style={{ marginBottom: "15px" }}>
+              <h2 className={styles.SeasonsH2} style={{ marginBlock: "15px" }}>
                 Temporadas
               </h2>
               <div className={styles.divCards}>
