@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CardsSeasons.module.css";
 import CardPoster from "../Cards/CardPoster";
 import { FaArrowLeft } from "react-icons/fa";
@@ -11,13 +11,47 @@ function ContainerCards({ temporadas, id }) {
   const [seasonContent, setSeasonContent] = useState(null);
   const [viewingSeasons, setViewingSeasons] = useState(true);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
 
   const handleSeasonClick = (seasonNumber) => {
     api.get(`/tmdb/season?id=${id}&season=${seasonNumber}`).then((response) => {
       setViewingSeasons(false);
       setSeasonContent(response.data.season);
     });
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+    
+    api.get(`/api/user/watched_episodes/${id}/${seasonNumber}`, config)
+    .then((response) => {
+      setEpisodes(response.data.episodes)
+    })
+    .catch(() => {
+      setEpisodes([])
+    });
   };
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+
+    if(seasonContent){
+      api.get(`/api/user/watched_episodes/${id}/${seasonContent.season_number}`, config)
+      .then((response) => {
+        setEpisodes(response.data.episodes)
+        console.log(episodes)
+      })
+      .catch(() => {
+        setEpisodes([])
+      });
+    }
+  }, [viewingSeasons, selectedEpisode])
 
   const handleGoBack = () => {
     if (selectedEpisode) {
@@ -83,8 +117,9 @@ function ContainerCards({ temporadas, id }) {
                   <CardEpisode
                     episode={item}
                     serieId={id}
-                    key={item.id}
+                    key={`${item.id}-${episodes}`}
                     onEpisodeClick={() => setSelectedEpisode(item)}
+                    seen={episodes.includes(item.episode_number)}
                   />
                 ))}
               </div>

@@ -61,14 +61,14 @@
 
 .divInfos span svg{
   font-size: 1.2em;
-  margin-right: 5px;
+  margin-right: 10px;
   opacity: .5;
 }
 
 .divInfos span{
   color: white;
   font-weight: bold;
-  font-size: .9em;
+  font-size: .85em;
 }
 
 .persons{
@@ -79,6 +79,15 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   margin-inline: auto;
+}
+
+.markAsSeen{
+  cursor: pointer;
+  background-color: var(--corFundo);
+  padding: 5px;
+  border-radius: 15px;
+  padding-inline: 15px;
+  font-size: 1em;
 }
 
 @media screen and (max-width: 1200px) {
