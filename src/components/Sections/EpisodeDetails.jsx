@@ -94,8 +94,8 @@ function EpisodeDetails({ episode }) {
                   <FaCalendar />
                   {episode.air_date}
                 </span>
-                <span onClick={handleClickSeen} style={{cursor: 'pointer'}}>
-                  <FaEye style={{fill: (seen ? "var(--corVerde)" : "white"), opacity: (seen ? "1" : "0.7")}}/>
+                <span onClick={handleClickSeen} className={styles.markAsSeen} >
+                  <FaEye style={{opacity: (seen ? "1" : "0.7"), marginRight: '10px'}}/>
                   {seen ? "Visto" : "Não visto"}
                 </span>
               </div>
