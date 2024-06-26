@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./CardsSeasons.module.css";
 import CardPoster from "../Cards/CardPoster";
 import { FaArrowLeft } from "react-icons/fa";
@@ -11,6 +11,7 @@ function ContainerCards({ temporadas, id }) {
   const [seasonContent, setSeasonContent] = useState(null);
   const [viewingSeasons, setViewingSeasons] = useState(true);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
+  const [episodes, setEpisodes] = useState([]);
 
   const handleSeasonClick = (seasonNumber) => {
     api.get(`/tmdb/season?id=${id}&season=${seasonNumber}`).then((response) => {
@@ -18,6 +19,24 @@ function ContainerCards({ temporadas, id }) {
       setSeasonContent(response.data.season);
     });
   };
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+
+    if(seasonContent){
+      api.get(`/api/user/watched_episodes/${id}/${seasonContent.season_number}`, config)
+      .then((response) => {
+        setEpisodes(response.data.episodes)
+      })
+      .catch((error) => {
+        
+      });
+    }
+  }, [viewingSeasons])
 
   const handleGoBack = () => {
     if (selectedEpisode) {
@@ -85,6 +104,7 @@ function ContainerCards({ temporadas, id }) {
                     serieId={id}
                     key={item.id}
                     onEpisodeClick={() => setSelectedEpisode(item)}
+                    seen={episodes.includes(item.episode_number)}
                   />
                 ))}
               </div>

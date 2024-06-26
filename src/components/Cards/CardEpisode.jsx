@@ -1,7 +1,7 @@
 import styles from './CardEpisode.module.css';
 import { FaRegClock, FaCalendarDays, FaStar } from "react-icons/fa6";
 
-function CardEpisode({ episode, serieId, onEpisodeClick }) {
+function CardEpisode({ episode, serieId, onEpisodeClick, seen }) {
 
   function handleClickedEpisode() {
     onEpisodeClick(episode);

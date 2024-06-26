@@ -1,19 +1,73 @@
 import React from "react";
 import styles from "./EpisodeDetails.module.css";
-import { FaClock, FaStar, FaCalendar } from "react-icons/fa6";
+import { FaClock, FaStar, FaCalendar, FaEye } from "react-icons/fa6";
 import Person from "../Person";
 import api from "../../services/api";
 import { useEffect, useState } from "react";
 
 function EpisodeDetails({ episode }) {
   const [credits, setCredits] = useState(null);
+  const [seen, setSeen] = useState(false);
+
+  useEffect(() => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
+
+    api.get(`/api/user/watched_episodes/${episode.show_id}/${episode.season_number}/${episode.episode_number}`, config)
+    .then((response) => {
+      setSeen(response.data.watched)
+    })
+    .catch((error) => {
+      
+    });
+  }, [episode])
 
   useEffect(() => {
       api.get(`tmdb/credits?id=${episode.show_id}&season_number=${episode.season_number}&episode_number=${episode.episode_number}`)
       .then((response) => {
         setCredits(response.data)
       })
-    }, [episode])
+      .catch((error) => {
+        
+      });
+    }, [seen])
+
+  const handleClickSeen = () => {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      };
+  
+      const data = {
+        series_id: episode.show_id,
+        season_number: episode.season_number,
+        episode_numbers: episode.episode_number
+      };
+  
+      if(seen){
+        api.delete(`/api/user/watched_episodes`, { data, ...config })
+        .then((response) => {
+          console.log(response);
+          setSeen(false)
+        })
+        .catch((error) => {
+
+        });
+      } else{
+        api.post(`/api/user/watched_episodes`, data, config)
+        .then((response) => {
+          console.log(response);
+          setSeen(true)
+        })
+        .catch((error) => {
+          
+        });
+      }
+    }
 
   return (
     <>
@@ -41,6 +95,10 @@ function EpisodeDetails({ episode }) {
                 <span>
                   <FaCalendar />
                   {episode.air_date}
+                </span>
+                <span onClick={handleClickSeen} style={{cursor: 'pointer'}}>
+                  <FaEye style={{fill: (seen ? "var(--corVerde)" : "white"), opacity: (seen ? "1" : "0.7")}}/>
+                  {seen ? "Visto" : "Não visto"}
                 </span>
               </div>
             </div>
