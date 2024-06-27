@@ -67,3 +67,9 @@
   margin-left: 10px;
   margin-block: auto;
 }
+
+@media screen and (max-width: 500px){
+  .MarkAsSeen{
+    display: none;
+  }
+}
