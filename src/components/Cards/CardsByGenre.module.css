@@ -24,7 +24,7 @@
     display: flex;
     flex-wrap: wrap;
     padding-inline: 20px;
-    margin-block: 15px;
+    margin-bottom: 5px;
     justify-content: start;
     align-items: center;
 }
