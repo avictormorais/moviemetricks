@@ -74,7 +74,7 @@
 
 .gridEpisodes{
     display: grid;
-    margin-inline: 30px;
+    padding-inline: 5px;
     grid-template-columns: repeat(auto-fit, minmax(330px, 335px));
     align-items: left;
     justify-content: space-around;

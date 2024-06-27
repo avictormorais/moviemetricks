@@ -70,6 +70,12 @@
   font-weight: bold;
   font-size: .85em;
 }
+.divInfos div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 .persons{
   width: 97%;
@@ -79,6 +85,26 @@
   flex-wrap: nowrap;
   overflow-x: auto;
   margin-inline: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--corFundo) var(--corFundoClaro);
+}
+
+.persons::-webkit-scrollbar {
+  width: 8px;
+  margin-bottom: 10px;
+}
+
+.persons::-webkit-scrollbar-track {
+  background-color: var(--corFundoClaro);
+}
+
+.persons::-webkit-scrollbar-thumb {
+  background-color: var(--corFundo);
+  border-radius: 4px;
+}
+
+.persons::-webkit-scrollbar-thumb:hover {
+  background-color: var(--corFundoEscuro);
 }
 
 .markAsSeen{
@@ -107,6 +133,21 @@
 
   .divDetails{
     width: 100%;
+  } 
+}
+
+@media screen and (max-width: 500px){
+  .divInfos{
+    flex-direction: column;
+    width: 100%;
   }
-  
+
+  .divInfos div{
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .divInfos span{
+    margin-inline: auto;
+  }
 }
