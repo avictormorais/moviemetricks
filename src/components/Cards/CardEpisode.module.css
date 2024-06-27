@@ -127,3 +127,9 @@
 .seenIcon{
   fill: white;
 }
+
+@media screen and (max-width: 390px){
+  .CardEpisode{
+    width: 85%;
+  }
+}

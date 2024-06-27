@@ -223,18 +223,22 @@ function Profile() {
               </div>
             </div>
           )}
-          <CardsByGenre
-            title={"Séries vistas"}
-            type={"tv"}
-            showGenres={false}
-            list={tvShows}
-          />
-          <CardsByGenre
-            title={"Filmes vistos"}
-            type={"tv"}
-            showGenres={false}
-            list={movies}
-          />
+          {tvShows.length > 0 && (
+            <CardsByGenre
+              title={"Séries vistas"}
+              type={"tv"}
+              showGenres={false}
+              list={tvShows}
+            />
+          )}
+          {movies.length > 0 && (
+            <CardsByGenre
+              title={"Filmes vistos"}
+              type={"tv"}
+              showGenres={false}
+              list={movies}
+            />
+          )}
           {playlists.length > 0 && (
             <>
               <Separador nome={"Playlists"} />
