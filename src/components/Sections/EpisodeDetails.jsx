@@ -16,56 +16,57 @@ function EpisodeDetails({ episode }) {
       },
     };
 
-    api.get(`/api/user/watched_episodes/${episode.show_id}/${episode.season_number}/${episode.episode_number}`, config)
-    .then((response) => {
-      setSeen(response.data.watched)
-    })
-    .catch((error) => {
-      
-    });
-  }, [episode])
+    api
+      .get(
+        `/api/user/watched_episodes/${episode.show_id}/${episode.season_number}/${episode.episode_number}`,
+        config
+      )
+      .then((response) => {
+        setSeen(response.data.watched);
+      })
+      .catch((error) => {});
+  }, [episode]);
 
   useEffect(() => {
-      api.get(`tmdb/credits?id=${episode.show_id}&season_number=${episode.season_number}&episode_number=${episode.episode_number}`)
+    api
+      .get(
+        `tmdb/credits?id=${episode.show_id}&season_number=${episode.season_number}&episode_number=${episode.episode_number}`
+      )
       .then((response) => {
-        setCredits(response.data)
+        setCredits(response.data);
       })
-      .catch((error) => {
-        
-      });
-    }, [seen])
+      .catch((error) => {});
+  }, [seen]);
 
   const handleClickSeen = () => {
-      const config = {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-        },
-      };
-  
-      const data = {
-        series_id: episode.show_id,
-        season_number: episode.season_number,
-        episode_numbers: episode.episode_number
-      };
-  
-      if(seen){
-        api.delete(`/api/user/watched_episodes`, { data, ...config })
-        .then((response) => {
-          setSeen(false)
-        })
-        .catch((error) => {
+    const config = {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      },
+    };
 
-        });
-      } else{
-        api.post(`/api/user/watched_episodes`, data, config)
+    const data = {
+      series_id: episode.show_id,
+      season_number: episode.season_number,
+      episode_numbers: episode.episode_number,
+    };
+
+    if (seen) {
+      api
+        .delete(`/api/user/watched_episodes`, { data, ...config })
         .then((response) => {
-          setSeen(true)
+          setSeen(false);
         })
-        .catch((error) => {
-          
-        });
-      }
+        .catch((error) => {});
+    } else {
+      api
+        .post(`/api/user/watched_episodes`, data, config)
+        .then((response) => {
+          setSeen(true);
+        })
+        .catch((error) => {});
     }
+  };
 
   return (
     <>
@@ -82,22 +83,37 @@ function EpisodeDetails({ episode }) {
               <h1 className={styles.EpName}>{episode.name}</h1>
               <p className={styles.overview}>{episode.overview}</p>
               <div className={styles.divInfos}>
-                <span>
-                  <FaClock />
-                  {episode.runtime} min
-                </span>
-                <span>
-                  <FaStar />
-                  {episode.vote_average.toFixed(1)}
-                </span>
-                <span>
-                  <FaCalendar />
-                  {episode.air_date}
-                </span>
-                <span onClick={handleClickSeen} className={styles.markAsSeen} >
-                  <FaEye style={{opacity: (seen ? "1" : "0.7"), marginRight: '10px'}}/>
-                  {seen ? "Visto" : "Não visto"}
-                </span>
+                <div>
+                  {episode.runtime && (
+                    <span>
+                      <FaClock />
+                      {episode.runtime} min
+                    </span>
+                  )}
+                  {episode.vote_average && (
+                    <span>
+                      <FaStar />
+                      {episode.vote_average.toFixed(1)}
+                    </span>
+                  )}
+                </div>
+                <div>
+                  {episode.air_date && (
+                    <span>
+                      <FaCalendar />
+                      {episode.air_date}
+                    </span>
+                  )}
+                  <span onClick={handleClickSeen} className={styles.markAsSeen}>
+                    <FaEye
+                      style={{
+                        opacity: seen ? "1" : "0.7",
+                        marginRight: "10px",
+                      }}
+                    />
+                    {seen ? "Visto" : "Não visto"}
+                  </span>
+                </div>
               </div>
             </div>
           </>
@@ -106,12 +122,30 @@ function EpisodeDetails({ episode }) {
       <div className={styles.persons}>
         {credits && (
           <>
-            {credits.cast.map((person, index) => (
-              person.profile_path && <Person key={index} name={person.name} image={person.profile_path} id={person.id} role={person.character.split('(')[0]}/>
-            ))}
-            {credits.guest_stars.map((person, index) => (
-              person.profile_path && <Person key={index} name={person.name} image={person.profile_path} id={person.id} role={person.character.split('(')[0]}/>
-            ))}
+            {credits.cast.map(
+              (person, index) =>
+                person.profile_path && (
+                  <Person
+                    key={index}
+                    name={person.name}
+                    image={person.profile_path}
+                    id={person.id}
+                    role={person.character.split("(")[0]}
+                  />
+                )
+            )}
+            {credits.guest_stars.map(
+              (person, index) =>
+                person.profile_path && (
+                  <Person
+                    key={index}
+                    name={person.name}
+                    image={person.profile_path}
+                    id={person.id}
+                    role={person.character.split("(")[0]}
+                  />
+                )
+            )}
           </>
         )}
       </div>
