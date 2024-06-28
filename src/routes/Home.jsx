@@ -12,6 +12,8 @@ function Home() {
   const [movies, setMovies] = useState(null);
   const [trendingSeries, setTrendingSeries] = useState(null);
   const [trendingMovie, setTrendingMovie] = useState(null);
+  const [seenTv, setSeenTv] = useState(null);
+  const [seenMovies, setSeenMovies] = useState(null);
 
   useEffect(() => {
     
@@ -38,6 +40,30 @@ function Home() {
       .catch(error => {
           console.log(error.request.responseText);
       })
+
+      if (localStorage.getItem('accessToken')) {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+          }
+        };
+
+        api.get(`/api/user/watched`, config)
+        .then((response) => {
+          const watchedMedia = response.data.watched_media;
+          const moviesList = watchedMedia.filter(
+            (item) => item.media_type === "movie"
+          );
+          const tvShowsList = watchedMedia.filter(
+            (item) => item.media_type === "tv"
+          );
+          setSeenMovies(moviesList);
+          setSeenTv(tvShowsList);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
       
   }, []);
 
@@ -48,6 +74,12 @@ function Home() {
           {trendingSeries && (
             <CardTrend id={trendingSeries.id} tipo="tv" isMiddlePage={false}/>
           )}
+          {seenTv && seenTv.length > 0 && (
+            <>
+              <Separador nome="Suas séries" />
+              <CardsByGenre title={""} type={"tv"} showGenres={false} list={seenTv}/>
+            </>
+          )}
           <Separador nome="Séries populares hoje" />
           <DailyGrid tipo='tv'/>
           <CardsByGenre title={"Séries da semana"} type={"tv"} showGenres={true} />
@@ -55,7 +87,12 @@ function Home() {
           {trendingMovie && (
             <CardTrend id={trendingMovie.id} tipo="movie" isMiddlePage={true}/>
           )}
-          <Separador nome="Filmes populares hoje" />
+          {seenMovies && seenMovies.length > 0 && (
+            <>
+              <Separador nome="Seus filmes" />
+              <CardsByGenre title={""} type={"movie"} showGenres={false} list={seenMovies}/>
+            </>
+          )}          <Separador nome="Filmes populares hoje" />
           <DailyGrid tipo='movie'/>
           <CardsByGenre title={"Filmes da semana"} type={"movie"} showGenres={true} />
           <Separador nome="Filmes em cartaz" />

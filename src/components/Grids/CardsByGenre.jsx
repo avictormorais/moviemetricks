@@ -45,7 +45,8 @@ function ContainerCards({ title, type, showGenres, list }) {
 
     return (
         <div className={styles.ContainerCards}>
-            <h2>{selectedGenre ? selectedGenre : title}</h2>
+            {selectedGenre && <h2>{selectedGenre}</h2>}
+            {!selectedGenre && title && <h2>{title}</h2>}
             {showGenres && (
                 <div className={styles.divGeneros}>
                     {content && showGenres && content.genres.map(genero => (

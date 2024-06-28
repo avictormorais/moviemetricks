@@ -1,5 +1,5 @@
 .ContainerCards{
-    background: linear-gradient(to bottom, var(--corClaro), transparent 80%);
+    background: linear-gradient(to bottom, var(--corClaro), transparent 50%);
     border-radius: 5px;
     width: 90vw;
     min-height: 350px;
@@ -31,11 +31,11 @@
 }
 
 .divCards {
-    width: 97%;
+    width: 95%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(175px, 185px));
     grid-gap: 0px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     margin-top: 5px;
 }
