@@ -9,7 +9,6 @@ nav {
     justify-content: space-between;
     padding: 13px 80px;
     z-index: 999;
-    pointer-events: none;
     transition: backdrop-filter 0.3s ease, background-color 0.3s ease;
 }
 
@@ -88,6 +87,115 @@ nav.scrolled {
 .divLenNotifications p{
     font-size: .7em;
     font-weight: bold;
+}
+
+.divNotificacoes{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    position: absolute;
+    background-color: var(--corFundo);
+    border-radius: 10px;
+    padding-inline: 10px;
+    padding-block: 10px;
+    flex-direction: column;
+    min-width: 350px;
+    padding: 15px;
+    transform: translateX(-85%) translateY(60%);
+}
+
+.topNot{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5px;
+}
+
+.topNot h1{
+    font-size: 1em;
+}
+
+.divNotificacoesContent{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    width: 100%;
+    overflow: hidden;
+}
+
+.divNotification{
+    border-radius: 10px;
+    background-color: var(--corModal);
+    width: 100%;
+    padding-block: 10px;
+    margin-top: 5px;
+}
+
+.topNotification{
+    width: 95%;
+    display: flex;
+    margin-inline: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+.divNotification h1{
+    font-size: .8em;
+    text-align: left;
+    margin-block: auto;
+    text-wrap: nowrap;
+    width: auto;
+}
+
+.divNotification p{
+    font-size: .7em;
+    width: 100%;
+    text-align: left;
+    font-weight: bold;
+    opacity: .7;
+    margin-left: 10px;
+}
+
+.iconClose{
+    font-size: 1em;
+    width: 50px;
+    margin-left: auto;
+    text-align: right;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.notificationMessage{
+    width: 100%;
+    margin-top: 5px;
+    text-align: left;
+    margin-top: 5px;
+}
+
+.markAll{
+    font-size: .8em;
+    font-weight: bold;
+    opacity: .7;
+    width: auto;
+    text-align: right;
+    text-wrap: nowrap;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+@media (max-width: 440px) {
+    .divNotificacoes{
+        width: 85%;
+        min-width: 0;
+        left: 50%;
+    }
+}
+
+@media (max-width: 620px) {
+    .divNotificacoes{
+        transform: translateX(-50%) translateY(65%);
+    }
 }
 
 @media (max-width: 700px) {

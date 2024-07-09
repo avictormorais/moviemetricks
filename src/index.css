@@ -20,28 +20,31 @@
 [data-theme="default"]{
   --corFundo: #111629;
   --corClaro: #1e243a;
+  --corModal: #2c3046;
 }
 
 [data-theme="soft"]{
   --corFundo: #1d2133;
   --corClaro: #25293d;
+  --corModal: #343a50;
 }
 
 [data-theme="carmesin"]{
   --corFundo: #1f0c19;
   --corClaro: #2a1825;
+  --corModal: #392133;
 }
 
 [data-theme="blue"]{
   --corFundo: #1e2529;
   --corClaro: #171d20;
-  --corTexto: #bde6fb;
+  --corModal: #22292d;
 }
 
 [data-theme="rose"]{
   --corFundo: #232136;
   --corClaro: #393552;
-  --corTexto: #e0def4;
+  --corModal: #4a4f68;
 }
 
 Link{
