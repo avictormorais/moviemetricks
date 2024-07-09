@@ -35,13 +35,11 @@
 [data-theme="blue"]{
   --corFundo: #1e2529;
   --corClaro: #171d20;
-  --corTexto: #bde6fb;
 }
 
 [data-theme="rose"]{
   --corFundo: #232136;
   --corClaro: #393552;
-  --corTexto: #e0def4;
 }
 
 Link{
