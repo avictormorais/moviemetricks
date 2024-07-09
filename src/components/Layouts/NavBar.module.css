@@ -94,7 +94,7 @@ nav.scrolled {
     justify-content: start;
     align-items: start;
     position: absolute;
-    background-color: var(--corModal);
+    background-color: var(--corFundo);
     border-radius: 10px;
     padding-inline: 10px;
     padding-block: 10px;
