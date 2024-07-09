@@ -146,7 +146,7 @@ function ContentActions({tipo, id, onTrailerCLick}){
       ) : (
         <IoNotificationsOutline onClick={handleShowNotificationOptions} className={styles.notificationIcon}/>
       )}
-      <div className={styles.divOptionsNotification} style={{opacity: showNotificationOptions ? '1' : '0'}}>
+      <div className={styles.divOptionsNotification} style={{display: showNotificationOptions ? 'flex' : 'none'}}>
         <p>Opções notificação</p>
         <div  onClick={() => handleNotification(true)} className={styles.optionNotification}>
           <MdEmail/>

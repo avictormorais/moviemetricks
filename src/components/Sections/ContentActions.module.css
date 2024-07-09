@@ -67,7 +67,7 @@
 .divOptionsNotification{
   background-color: var(--corFundo);
   position: absolute;
-  display: flex;
+  display: none;
   flex-direction: column;
   margin-top: 180px;
   border-radius: 10px;

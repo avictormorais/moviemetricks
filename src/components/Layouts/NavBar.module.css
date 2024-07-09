@@ -71,6 +71,25 @@ nav.scrolled {
     transform: scale(1.15);
 }
 
+.divLenNotifications{
+    display: flex;
+    position: absolute;
+    background-color: rgba(255, 0, 0, 0.8);
+    border-radius: 360px;
+    padding: 3px;
+    height: 8px;
+    width: 8px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-left: 15px;
+}
+
+.divLenNotifications p{
+    font-size: .7em;
+    font-weight: bold;
+}
+
 @media (max-width: 700px) {
     .navbar {
         position: fixed;
