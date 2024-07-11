@@ -10,7 +10,6 @@
 .LogoLoading{
   height: 150px;
   animation: logoAnimation infinite;
-  margin-bottom: 50px;
 }
 
 @keyframes logoAnimation {
@@ -27,21 +26,4 @@
 
 .LogoLoading {
   animation: logoAnimation 2s infinite;
-}
-
-.DivLoading h1{
-  font-size: 1.5em;
-  margin-top: 30px;
-}
-
-.DivLoading p{
-  font-size: 1em;
-  margin-top: 10px;
-  opacity: 0;
-}
-
-.DivLoading a{
-  color: white;
-  font-weight: bolder;
-  text-decoration: underline;
 }
