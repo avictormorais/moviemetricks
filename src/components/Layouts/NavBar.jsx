@@ -52,7 +52,8 @@ const NavBar = () => {
         setShowNotifications(!showNotifications);
     }
 
-    const handleDeleteNotification = (id) => {
+    const handleDeleteNotification = (e, id) => {
+        e.preventDefault();
         const config = {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('accessToken')}`
@@ -114,11 +115,11 @@ const NavBar = () => {
                     <div className={styles.divNotificacoesContent}>
                         {notifications.length > 0 ? (
                             notifications.slice(0, 7).map((notification, index) => (
-                                <div key={index} className={styles.divNotification}>
+                                <Link to={notification.contentType == 'serie' ? `/details/tv/${notification.contentId}` : `/details/movie/${notification.contentId}`} key={index} className={styles.divNotification} onClick={handleShowNotifications}>
                                     <div className={styles.topNotification} key={notification.id}>
                                         <h1>{notification.title}</h1>
                                         <p>{calculateTimeAgo(notification.date)}</p>
-                                        <IoClose className={styles.iconClose} onClick={() => handleDeleteNotification(notification.id)}/>
+                                        <IoClose className={styles.iconClose} onClick={(e) => handleDeleteNotification(e, notification.id)} />
                                     </div>
                                     {notification.contentType == 'serie' ? (
                                         <>
@@ -131,11 +132,16 @@ const NavBar = () => {
                                     ) : (
                                         <p className={styles.notificationMessage}>Estreia hoje!</p>
                                     )}
-                                </div>
+                                </Link>
                             ))
                         ) : (
                             <div className={styles.divNotification}>
                                 <p>Não há notificações</p>
+                            </div>
+                        )}
+                        {notifications.length > 7 && (
+                            <div className={styles.divNotification}>
+                                <p>Mais {notifications.length - 7}...</p>
                             </div>
                         )}
                         <p className={styles.markAll} onClick={handleMarkAllAsRead}>Marcar tudo como lido</p>
