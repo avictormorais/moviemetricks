@@ -12,6 +12,7 @@ import SectionMoreInfo from '../components/Sections/SectionMoreInfo';
 import WhereToWatch from '../components/Sections/WhereToWatch';
 import ContentActions from '../components/Sections/ContentActions';
 import Loading from '../components/Layouts/Loading';
+import MovieCard from '../components/Cards/Decorativos/MovieCard';
 
 function Details() {
   const [content, setContent] = useState(null);
@@ -57,6 +58,9 @@ function Details() {
             <p className={styles.Overview}>{content.overview}</p>
           )}
           <ContentActions tipo={tipo} id={id} onTrailerCLick={getTrailer}/>
+          {tipo == 'movie' && (
+            <MovieCard id={id}/>
+          )}
           {content && (tipo === 'serie' ? content.aggregate_credits : content.credits) && (tipo === 'serie' ? content.aggregate_credits : content.credits).cast.slice(0, 20)
           .some(person => person.profile_path !== null) && (
             <div className={styles.Pessoas}>
