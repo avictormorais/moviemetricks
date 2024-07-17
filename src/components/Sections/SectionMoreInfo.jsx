@@ -34,7 +34,7 @@ function SectionMoreInfo({content}){
             </div>
           </div>
         ) : null}
-        {(content.networks && content.networks[0].logo_path) || (content.production_companies && content.production_companies[0].logo_path) ? (
+        {(content.networks && content.networks[0] && content.networks[0].logo_path) || (content.production_companies && content.production_companies[0] && content.production_companies[0].logo_path) ? (
           <div className={styles.DivInfo}>
             <h3>Produtora</h3>
             <div className={styles.InfoContent}>
