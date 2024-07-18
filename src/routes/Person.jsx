@@ -10,6 +10,7 @@ import CardsByGenre from '../components/Grids/CardsByGenre';
 import noImage from '../assets/SI.png';
 import Review from '../components/Reviews/Review';
 import { useNavigate } from 'react-router-dom';
+import Birthday from '../components/Cards/Decorativos/Birthday';
 
 function Person() {
   const { id } = useParams();
@@ -156,7 +157,7 @@ function Person() {
                         {content.birthday && (
                           <span className={styles.spanInfo}>
                             <FaCalendarDay className={styles.iconInfo} />
-                            <h4>{new Date(content.birthday).toLocaleDateString('pt-BR')}</h4>
+                            <h4>{`${content.birthday.split('-')[2]}-${content.birthday.split('-')[1]}-${content.birthday.split('-')[0]}`}</h4>
                           </span>
                         )}
                         {content.deathday && (
@@ -182,18 +183,17 @@ function Person() {
                       </div>
                     ) : null}
 
-
                     {tvShows || movies ? (
                       <div className={styles.divInfo}>
                         <h3 className={styles.titleInfo}>Atuou em</h3>
                         {tvShows ? (
                           <span className={styles.spanInfo}>
-                            <h4>{tvShows} Séries</h4>
+                            <h4>{tvShows} {tvShows == 1 ? 'Série' : 'Séries'}</h4>
                           </span>
                         ) : null}
                         {movies ? (
                           <span className={styles.spanInfo}>
-                            <h4>{movies} Filmes</h4>
+                            <h4>{movies} {movies == 1 ? 'Filme' : 'Filmes'}</h4>
                           </span>
                         ) : null}
                       </div>
@@ -204,12 +204,12 @@ function Person() {
                         <h3 className={styles.titleInfo}>Trabalhou em</h3>
                         {tvCrew ? (
                           <span className={styles.spanInfo}>
-                            <h4>{tvCrew} Séries</h4>
+                            <h4>{tvCrew} {tvCrew == 1 ? 'Série' : 'Séries'}</h4>
                           </span>
                         ) : null}
                         {movieCrew ? (
                           <span className={styles.spanInfo}>
-                            <h4>{movieCrew} Filmes</h4>
+                            <h4>{movieCrew} {movieCrew == 1 ? 'Filme' : 'Filmes'}</h4>
                           </span>
                         ) : null}
                       </div>
@@ -222,7 +222,9 @@ function Person() {
               {content.biography && (
                 <p className={styles.biography}>{content.biography}</p>
               )}
-
+              {(new Date().toISOString().split('T')[0].split('-')[1] + '-' + new Date().toISOString().split('T')[0].split('-')[2]) == (content.birthday.split('-')[1]+ '-' +content.birthday.split('-')[2]) && (
+                <Birthday nome={content.name}/>
+              )}
               {comments && comments.length > 0 && (
                 <div className={styles.divReviews}>
                   <h1>Avaliações feitas por {username}</h1>

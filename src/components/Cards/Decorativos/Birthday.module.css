@@ -1,0 +1,67 @@
+.cardBirthday{
+  background-color: var(--corClaro);
+  width: 100%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding-block: 30px;
+  margin-top: 10px;
+}
+
+.cardBirthday svg{
+  font-size: 4em;
+  opacity: .7;
+  margin-right: 200px;
+  margin-left: 50px;
+}
+
+.cardBirthday div{
+  margin-right: 200px;
+}
+
+.cardBirthday h1{
+  font-size: 1.5em;
+}
+
+.cardBirthday p{
+  font-size: 1em;
+  margin-top: 5px;
+  opacity: .7;
+}
+
+.divBtn{
+  background-color: var(--corFundo);
+  border-radius: 10px;
+  padding-block: 5px;
+  margin-top: 10px;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.divBtn p{
+  opacity: 1;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 1100px){
+  .cardBirthday{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cardBirthday svg{
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 10px;
+  }
+
+  .cardBirthday div{
+    margin-right: 0;
+  }
+
+  .cardBirthday p{
+    margin-inline: 20px;
+  }
+}

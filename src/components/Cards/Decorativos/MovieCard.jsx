@@ -7,7 +7,6 @@ import api from "../../../services/api";
 function MovieCard({ id }) {
   const [releaseDate, setReleaseDate] = useState(null);
   const [daysRemaining, setDaysRemaining] = useState(null);
-  const currentDate = new Date();
 
   useEffect(() => {
     api
@@ -44,7 +43,6 @@ function MovieCard({ id }) {
         </div>
       );
     } else {
-      console.log(daysRemaining)
       return (
         <div className={styles.cardMovie}>
           <>
