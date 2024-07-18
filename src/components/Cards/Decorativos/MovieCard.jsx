@@ -7,29 +7,30 @@ import api from "../../../services/api";
 function MovieCard({ id }) {
   const [releaseDate, setReleaseDate] = useState(null);
   const [daysRemaining, setDaysRemaining] = useState(null);
-  const currentDate = new Date();
 
   useEffect(() => {
-    api.get(`/tmdb/release_date?id=${id}`)
+    api
+      .get(`/tmdb/release_date?id=${id}`)
       .then((response) => {
-        const movieReleaseDate = new Date(response.data.release_dates);
+        const movieReleaseDate = new Date(
+          response.data.release_dates.split("T")[0]
+        );
+        const currentDate = new Date();
+        const timeDiff = movieReleaseDate.getTime() - currentDate.getTime();
+        const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
         setReleaseDate(movieReleaseDate);
-
-        const differenceInTime = movieReleaseDate.getTime() - currentDate.getTime();
-        const differenceInDays = Math.ceil(differenceInTime / (1000 * 3600 * 24));
-        setDaysRemaining(differenceInDays);
+        setDaysRemaining(daysDiff);
       })
       .catch((error) => {
         console.log(error);
       });
   }, [id]);
-
   if (!releaseDate) {
     return null;
-  } else if (currentDate >= releaseDate) {
+  } else if (daysRemaining < -1) {
     return null;
   } else {
-    if (daysRemaining == 0) {
+    if (daysRemaining < 1) {
       return (
         <div className={styles.cardMovie}>
           <>
@@ -47,11 +48,21 @@ function MovieCard({ id }) {
           <>
             <BsClockHistory />
             <div>
-              <h1>
-                Faltam <span>{daysRemaining}</span> dias!
-              </h1>
-              <p>Este filme será lançado em breve.</p>
-              <p>Ative a notificação para ser alertado da estreia.</p>
+              {daysRemaining == 1 ? (
+                <>
+                  <h1>É amanhã!</h1>
+                  <p>O grande dia está perto!</p>
+                  <p>Falta apenas um dia para a estreia!</p>
+                </>
+              ) : (
+                <>
+                  <h1>
+                    Faltam <span>{daysRemaining}</span> dias!
+                  </h1>
+                  <p>Este filme será lançado em breve.</p>
+                  <p>Ative a notificação para ser alertado da estreia.</p>
+                </>
+              )}
             </div>
           </>
         </div>
